@@ -1,8 +1,9 @@
-# First benchmark proposal
+# SD benchmark protocol and remaining model decisions
 
 Status: processed-data assumptions and zero-target policy approved; remaining
 pipeline and experiment settings are proposals. Local artifacts acquired.
-Reviewed: 2026-11-08.
+Reviewed: 2026-11-08. Active research models: BigST and PatchSTG.
+Deadline: November 24, 2026; see [roadmap](roadmap.md).
 
 ## Recommended task
 
@@ -33,13 +34,12 @@ this NPZ. Hosted data terms remain unresolved; data stays outside Git.
 
 ## Split and window rules — implemented for the approved pipeline
 
-For exactly T=35,040 verified ordered frames, split by target timestamps at
+For T=35,040 frames in preserved file order, split by target frame indices at
 floor(0.6T)=21,024 and T-floor(0.2T)=28,032. Training targets have indices below
 21,024; validation targets are [21,024,28,032); test targets are [28,032,T).
 Every target in a 12-step window must fall within one split. Context may use
 observations from earlier splits already available at the forecast origin.
-Reject target windows crossing a boundary. Store exact timestamp boundaries in
-the manifest once real timestamps are checked. This is an explicit project rule;
+Reject target windows crossing a boundary. Boundaries are frame indices; any displayed dates are reconstructed assumptions. This is an explicit project rule;
 the [LargeST generation script](https://github.com/liuxu77/LargeST/blob/main/data/generate_data_for_training.py)
 splits origin indices instead, so matching a 60/20/20 ratio is not exact equivalence.
 
@@ -78,11 +78,14 @@ mask behavior remains for a later training milestone.
 
 ## Training and efficiency — proposed
 
-First validate persistence and training-only seasonal averages. Implement
-STAEformer as the first attention model; see the compatibility review for why.
+Persistence and training-only seasonal averages are implemented and evaluated.
+Next review BigST and PatchSTG together; propose PatchSTG implementation first.
+Resolve BigST long-history inclusion and common origins before training.
+ASTGCN/STAEformer and additional datasets are deferred.
 Use validation MAE to select checkpoints. Initial neural smoke runs use seed
-2023; final comparison uses seeds 2023, 2024, 2025 with per-seed values and
-mean/std. Fix a tuning budget before comparative runs. Optimizer, loss,
+2023; aim for final seeds 2023, 2024, 2025 if measured runtimes allow. Freeze
+the actual seed budget before final runs and report it; do not claim variance
+from one seed. Fix a tuning budget before comparative runs. Optimizer, loss,
 epoch budget and model configs are not selected by this planning milestone.
 
 Start GPU checks with batch 1, FP32, no compilation. Compare latency at batch 1
@@ -91,7 +94,8 @@ largest feasible batches. Measure synchronized forward-only device timing and
 end-to-end timing separately, using 20 warm-up iterations and 100 timed iterations
 as an initial measurement plan. Report median/p95 latency, sample throughput,
 peak allocated/reserved GPU memory, trainable/total parameters, epoch and total
-training time, plus preprocessing/auxiliary costs. Hardware feasibility is pending.
+training time, plus preprocessing/auxiliary costs. Model-level GPU feasibility is pending despite successful CUDA environment checks.
+Measurements cover SD only; larger-network scaling trials are deferred.
 
 ## Storage and tests to implement later
 

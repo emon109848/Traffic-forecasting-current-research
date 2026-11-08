@@ -1,5 +1,9 @@
 # Persistence baseline — SD v1
 
+Scope note: this completed baseline remains a reference for the BigST/PatchSTG
+SD comparison due November 24, 2026. Recorded scores and original run provenance
+are unchanged. See [roadmap](../docs/roadmap.md).
+
 Measured locally on 2026-11-08. Independent educational baseline; no training.
 
 Persistence repeats the latest observed flow for all 12 future steps, including

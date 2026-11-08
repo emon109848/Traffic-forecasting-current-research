@@ -1,5 +1,10 @@
 # Processed SD data pipeline
 
+This shared pipeline is retained for the BigST/PatchSTG comparison on SD 2019
+(deadline November 24, 2026). BigST long-history support and common-origin changes
+are not implemented; review them before changing current windows. See
+[roadmap](roadmap.md).
+
 This is independently written project infrastructure, not copied author code.
 No forecasting baseline, training loss or metric implementation is included yet.
 

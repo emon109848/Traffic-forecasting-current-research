@@ -1,6 +1,15 @@
 # Environment audit and recommendation
 
-Reviewed: 2026-11-08. Read-only inspection; no packages or environments changed.
+Reviewed: 2026-11-08. Original read-only audit retained as historical context.
+
+Current choice: retain pml, validated on CPU and user-terminal CUDA. Exact host
+GPU is RTX 5060 Laptop GPU (8,518,041,600 bytes, compute capability 12.0). See
+[validation record](environment_validation.md). Earlier unknown-GPU and Python
+3.11 recommendations below describe the original audit, not current blockers.
+
+Deadline scope: BigST/PatchSTG on SD 2019, due November 24, 2026. Model-level
+forward/backward memory and throughput still need measurement. STAEformer memory
+estimates below are historical only. See [roadmap](roadmap.md).
 
 ## Observed environment
 
@@ -25,7 +34,7 @@ GPU restrictions do not establish that the user's own terminal lacks CUDA.
 Installed CUDA toolkit packages do not demonstrate a working driver or kernel.
 No CUDA computation, model memory measurement, or training was performed.
 
-## Recommended environment strategy — proposed, not installed
+## Historical environment proposal — superseded by retaining pml
 
 Keep the existing pml environment unchanged. Prefer a dedicated project Conda
 environment with Python 3.11 as a conservative starting candidate for the older
@@ -69,7 +78,7 @@ optimizer state, and intermediates; it is not a peak VRAM estimate. Consequently
 SD data storage is plausible on visible RAM, but GPU feasibility is unverified.
 Start memory checks at batch size 1 and grow after measuring forward/backward.
 
-## Information needed before environment installation
+## Historical request — host environment validation now complete
 
 Run nvidia-smi in the user's own terminal and record GPU name, total VRAM,
 driver, and displayed CUDA version. The displayed CUDA version describes driver

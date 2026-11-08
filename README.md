@@ -1,32 +1,39 @@
-# Comparative Study of Attention-Based Traffic Forecasting Models
+# BigST vs PatchSTG: Traffic Forecasting on LargeST-SD
 
-A practical research and learning project comparing attention-based models for
-spatio-temporal traffic forecasting. The aim is to understand research papers,
-build traceable implementations, and evaluate accuracy, computational efficiency,
-and scalability under explicit experimental conditions.
+A practical research and learning project comparing BigST (2024) and PatchSTG
+(KDD 2025) for traffic forecasting on processed LargeST-SD 2019. We study their
+architectures, prediction accuracy and computational efficiency on one fixed
+network. Submission deadline: **November 24, 2026**.
+
+The research question is how linearized spatial modeling and spatially patched
+attention compare under a documented SD protocol. One network size supports an
+efficiency comparison on SD; it does not establish large-network scalability.
 
 ## Current status
 
 Foundation, compatibility review, environment validation, dataset inspection and
 the reusable data pipeline are complete. Local SD data is excluded from Git.
-A tested persistence baseline and measured results are available. No attention
+Tested persistence and seasonal-average baselines with measured results are available. No attention
 models or neural training loop exist yet.
 
-Initial model candidates are ASTGCN (2019), STAEformer (2023), BigST (2024), and
-PatchSTG (KDD 2025). Inclusion and implementation order remain provisional.
-LargeST-SD is a dataset candidate, not a confirmed benchmark choice.
+## Scope and roadmap
 
-## Roadmap
+Active research models: **BigST and PatchSTG**. Keep the existing persistence and
+seasonal-average baselines as reference results. ASTGCN, STAEformer, new model
+searches, extra datasets, broad scalability trials and extensive ablations are
+deferred beyond the deadline.
 
-1. Project foundation and development conventions.
-2. Paper/protocol review, dataset selection, and reusable data preparation.
-3. Simple forecasting baselines to validate the pipeline.
-4. Individually reviewed attention-based model implementations.
-5. Unified experiments with documented model-specific requirements.
-6. Comparative analysis, ablations, and visualizations.
-7. Portfolio documentation and reproducibility instructions.
+1. Completed: foundation, Conda/CUDA checks, SD audit, data pipeline and baselines.
+2. Next proposed: focused BigST/PatchSTG architecture and feasibility review;
+   resolve BigST's long-history variant, input fairness and adaptation requirements.
+3. Implement and test PatchSTG, then BigST, subject to feasibility and approval.
+4. Run consistent accuracy and SD efficiency experiments within a measured budget.
+5. Write the comparison, plots, limitations and reproduction instructions.
 
-Each major milestone requires approval before work starts.
+See the [deadline roadmap](docs/roadmap.md). Each major milestone requires approval;
+this scope change does not authorize the next implementation or training phase.
+Careful author-code adaptation with attribution is an option after license/source
+review; exact implementation categories and deviations must be documented.
 
 ## Development
 
@@ -48,6 +55,10 @@ Installation and training instructions will be added when validated. Git is init
 
 ## Project records
 
+Start with [the workflow learning guide](workflow.md) for what was built and why.
+
+- [Deadline scope and roadmap](docs/roadmap.md)
+- [Seasonal-average comparison](reports/seasonal_average_sd_v1.md)
 - [Persistence baseline results](reports/persistence_sd_v1.md)
 - [Evaluation rules](docs/evaluation.md)
 - [Data pipeline and test commands](docs/data_pipeline.md)
@@ -63,10 +74,8 @@ Installation and training instructions will be added when validated. Git is init
 
 ## Reference starting points
 
-- [ASTGCN paper](https://guoshnbjtu.github.io/pdfs/AAAI2019-GuoS.2690.pdf)
-  and [author repository](https://github.com/guoshnBJTU/ASTGCN-2019-pytorch)
-- [STAEformer author repository](https://github.com/XDZhelheim/STAEformer)
-- [BigST author repository](https://github.com/usail-hkust/BigST)
+- [BigST paper](https://www.vldb.org/pvldb/vol17/p1081-han.pdf)
+  and [author repository](https://github.com/usail-hkust/BigST)
 - [PatchSTG paper](https://arxiv.org/abs/2412.09972)
   and [author repository](https://github.com/LMissher/PatchSTG)
 - [LargeST paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/ee57cd73a76bd927ffca3dda1dc3b9d4-Paper-Datasets_and_Benchmarks.pdf)

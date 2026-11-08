@@ -1,5 +1,9 @@
 # Model / paper title
 
+Active research records should cover BigST and PatchSTG for the November 24,
+2026 SD comparison. ASTGCN/STAEformer implementations are deferred. Consult
+[roadmap](../roadmap.md) and label the precise BigST history variant.
+
 Status: template; no implementation or reproduction claim.
 
 ## Provenance

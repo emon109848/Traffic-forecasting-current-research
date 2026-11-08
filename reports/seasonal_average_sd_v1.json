@@ -1,0 +1,319 @@
+{
+  "baseline": "seasonal_average",
+  "implementation": "independent educational baseline",
+  "created_utc": "2026-11-08T07:14:14.673218+00:00",
+  "config": {
+    "history": 12,
+    "horizon": 12,
+    "stride": 1,
+    "batch_size": 64,
+    "splits": {
+      "train": [
+        0,
+        21024
+      ],
+      "val": [
+        21024,
+        28032
+      ],
+      "test": [
+        28032,
+        35040
+      ]
+    },
+    "target_mask": "finite nonnegative targets != 0",
+    "mape": "100 * mean(abs(error) / target) on nonzero targets; no epsilon",
+    "aggregation": "pooled valid forecast-origin/lead/sensor/channel observations",
+    "input_zero_policy": "preserve",
+    "prediction_units": "original source flow units",
+    "training": "nonzero training-only group averages; no gradient optimization",
+    "device": "cpu",
+    "seasonal_fit": "weekday/slot/sensor mean excluding zero training readings",
+    "fallback": "sensor nonzero training mean, then global nonzero training mean",
+    "seed": null,
+    "seed_reason": "No stochastic operations; closed-form training statistics only.",
+    "calendar_assumption": "2019-01-01 00:00, 15 min, no timezone; Monday=0; used for fitting and forecasting",
+    "sensor_alignment": "assumed metadata row order"
+  },
+  "software": {
+    "python": "3.14.8",
+    "numpy": "2.5.4",
+    "torch": "2.14.1+cu130"
+  },
+  "hardware": {
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "processor": ""
+  },
+  "git": {
+    "revision": "c3799b1c7d51d9e643e5e663a47dae5d2db7f712",
+    "status": "M src/traffic_benchmark/baselines/__init__.py\n?? scripts/evaluate_seasonal_average.py\n?? src/traffic_benchmark/baselines/seasonal_average.py\n?? tests/test_seasonal_average.py"
+  },
+  "source_hashes": {
+    "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+    "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+  },
+  "implementation_hashes": {
+    "scripts/evaluate_seasonal_average.py": "d3636a193253743eee5be1b4898dbbf18b29d0f1f2b8b4a9d55c073deba77e25",
+    "src/traffic_benchmark/baselines/seasonal_average.py": "aaa0c06079e113593090d9d169fad43e4925685aea53e0c7349c1be835884b97",
+    "src/traffic_benchmark/evaluation/metrics.py": "fa392824bebe9b5337a0ce37cb4084cc9e32815b7582c1e3dd843415ca22e9a6",
+    "src/traffic_benchmark/data/pipeline.py": "ef79941566b88c253f16377266f7664b395f8dd0919c099f3ed34d7111443db0"
+  },
+  "results": {
+    "val": {
+      "windows": 6997,
+      "overall_pooled": {
+        "mae": 19.744174722407486,
+        "rmse": 36.44695359105408,
+        "mape_percent": 12.453603290127992,
+        "valid_targets": 58367674,
+        "total_targets": 60118224,
+        "valid_fraction": 0.9708815416769464
+      },
+      "per_horizon": [
+        {
+          "step": 1,
+          "mae": 19.74190215884052,
+          "rmse": 36.446072957561356,
+          "mape_percent": 12.463546368115372,
+          "valid_targets": 4864011,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708891599991377
+        },
+        {
+          "step": 2,
+          "mae": 19.74140324228539,
+          "rmse": 36.44483287254713,
+          "mape_percent": 12.46194028865828,
+          "valid_targets": 4864002,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708873635388829
+        },
+        {
+          "step": 3,
+          "mae": 19.74098228109248,
+          "rmse": 36.44387898262181,
+          "mape_percent": 12.459950124293421,
+          "valid_targets": 4863994,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708857666853232
+        },
+        {
+          "step": 4,
+          "mae": 19.741318797788733,
+          "rmse": 36.444042949885166,
+          "mape_percent": 12.458232403092694,
+          "valid_targets": 4863986,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708841698317635
+        },
+        {
+          "step": 5,
+          "mae": 19.741744653217246,
+          "rmse": 36.44475580377292,
+          "mape_percent": 12.456392018369908,
+          "valid_targets": 4863979,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708827725848987
+        },
+        {
+          "step": 6,
+          "mae": 19.742353948755852,
+          "rmse": 36.445357051853726,
+          "mape_percent": 12.454828870380755,
+          "valid_targets": 4863973,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708815749447289
+        },
+        {
+          "step": 7,
+          "mae": 19.743206764379075,
+          "rmse": 36.44608701975058,
+          "mape_percent": 12.45325451827577,
+          "valid_targets": 4863967,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708803773045591
+        },
+        {
+          "step": 8,
+          "mae": 19.744410995918184,
+          "rmse": 36.44702083517984,
+          "mape_percent": 12.451900578298593,
+          "valid_targets": 4863961,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708791796643893
+        },
+        {
+          "step": 9,
+          "mae": 19.74586755559518,
+          "rmse": 36.44824834962162,
+          "mape_percent": 12.449357031878488,
+          "valid_targets": 4863957,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708783812376094
+        },
+        {
+          "step": 10,
+          "mae": 19.747844976056346,
+          "rmse": 36.45060515552402,
+          "mape_percent": 12.447013374376663,
+          "valid_targets": 4863954,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708777824175245
+        },
+        {
+          "step": 11,
+          "mae": 19.74916313149826,
+          "rmse": 36.45089985805876,
+          "mape_percent": 12.444061017866826,
+          "valid_targets": 4863948,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708765847773547
+        },
+        {
+          "step": 12,
+          "mae": 19.749898303567807,
+          "rmse": 36.45164021661626,
+          "mape_percent": 12.442762554848008,
+          "valid_targets": 4863942,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708753871371849
+        }
+      ],
+      "evaluation_wall_seconds": 0.52424084499944
+    },
+    "test": {
+      "windows": 6997,
+      "overall_pooled": {
+        "mae": 28.004523008658758,
+        "rmse": 53.390612925772594,
+        "mape_percent": 19.996410643560477,
+        "valid_targets": 58158396,
+        "total_targets": 60118224,
+        "valid_fraction": 0.9674004341844828
+      },
+      "per_horizon": [
+        {
+          "step": 1,
+          "mae": 27.986808303932495,
+          "rmse": 53.38039451240923,
+          "mape_percent": 19.98467159680394,
+          "valid_targets": 4846601,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674140074397407
+        },
+        {
+          "step": 2,
+          "mae": 27.991791785649784,
+          "rmse": 53.38431234365619,
+          "mape_percent": 19.98821586756092,
+          "valid_targets": 4846589,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674116121594011
+        },
+        {
+          "step": 3,
+          "mae": 27.99583230976308,
+          "rmse": 53.386600124362396,
+          "mape_percent": 19.990941137447727,
+          "valid_targets": 4846576,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674090172723665
+        },
+        {
+          "step": 4,
+          "mae": 27.999137824148388,
+          "rmse": 53.388298166499936,
+          "mape_percent": 19.992954707587913,
+          "valid_targets": 4846564,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674066219920269
+        },
+        {
+          "step": 5,
+          "mae": 28.002147185228324,
+          "rmse": 53.38991825104478,
+          "mape_percent": 19.994986542385334,
+          "valid_targets": 4846551,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674040271049923
+        },
+        {
+          "step": 6,
+          "mae": 28.004767033961517,
+          "rmse": 53.391214714202114,
+          "mape_percent": 19.996597658247254,
+          "valid_targets": 4846538,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674014322179577
+        },
+        {
+          "step": 7,
+          "mae": 28.007224367559544,
+          "rmse": 53.392404163265915,
+          "mape_percent": 19.99812055690015,
+          "valid_targets": 4846526,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673990369376181
+        },
+        {
+          "step": 8,
+          "mae": 28.00963488668692,
+          "rmse": 53.39341480639114,
+          "mape_percent": 19.99961839860447,
+          "valid_targets": 4846513,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673964420505835
+        },
+        {
+          "step": 9,
+          "mae": 28.01160720691759,
+          "rmse": 53.394276867949216,
+          "mape_percent": 20.00071817946279,
+          "valid_targets": 4846501,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673940467702439
+        },
+        {
+          "step": 10,
+          "mae": 28.01346066810282,
+          "rmse": 53.39488833824087,
+          "mape_percent": 20.00198350653249,
+          "valid_targets": 4846490,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673918510965993
+        },
+        {
+          "step": 11,
+          "mae": 28.01513425449515,
+          "rmse": 53.39549971005573,
+          "mape_percent": 20.003227327119877,
+          "valid_targets": 4846478,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673894558162597
+        },
+        {
+          "step": 12,
+          "mae": 28.016731225939363,
+          "rmse": 53.39613111654401,
+          "mape_percent": 20.004892862156414,
+          "valid_targets": 4846469,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673876593560049
+        }
+      ],
+      "evaluation_wall_seconds": 0.5564719899994088
+    }
+  },
+  "fit": {
+    "wall_seconds": 0.8006249609989027,
+    "table_shape": [
+      672,
+      716,
+      1
+    ],
+    "fallback_cells": 2719,
+    "total_cells": 481152,
+    "sensors_without_nonzero_training": 4
+  },
+  "timing_scope": "CPU batch indexing, lookup forecasting, metric accumulation; excludes loading/setup/fitting; not an inference benchmark"
+}

@@ -2,6 +2,12 @@
 
 Updated: 2026-11-08
 
+## Current deadline scope
+
+Compare BigST and PatchSTG on processed SD 2019 by November 24, 2026.
+Keep both simple baselines and all shared infrastructure. ASTGCN/STAEformer,
+extra datasets and broad scalability work are deferred. See roadmap.md.
+
 ## Approved scope and completed work
 
 Milestone 1: minimal repository foundation, complete.
@@ -28,8 +34,8 @@ Host GPU visibility and PyTorch CUDA execution are confirmed by the subsequent
 user-run validation below.
 
 Recommend SD 2019, 716 sensors, 15-minute flow, three-hour history and forecast.
-This is a proposal, not a frozen protocol. Missingness, exact provenance, units,
-calendar and acquisition path require actual data inspection. Paper reproduction
+The pipeline and mask rules below are implemented. Research-model input/history
+requirements and training/efficiency settings still need review. Paper reproduction
 and shared-protocol adaptation remain separate. Source commits/licenses must be
 recorded before incorporating external code. Project license remains undecided.
 
@@ -54,7 +60,7 @@ fields. Traffic contains 563,841 zeros and four all-zero frames (6536–6539).
 Available artifacts are structurally consistent, but sensor-column alignment,
 original timestamps, exact missingness semantics and hosted data terms are not
 independently established. Do not claim these gates were verified. No graph
-acquired, preprocessing applied, or experiments run.
+acquired; shared normalization and simple baseline evaluations are complete.
 
 ## Data protocol decisions — approved
 
@@ -82,17 +88,36 @@ Pooled test MAE 60.7825, RMSE 94.3350, MAPE 41.7801%, valid targets 96.7400%.
 No training or parameter fitting; no packages installed. CLI stores full outputs
 in ignored runs/. Reports identify uncommitted code through implementation hashes.
 
+## Seasonal-average baseline milestone — complete
+
+Training-only weekday/slot/sensor nonzero means with sensor/global fallback
+implemented and evaluated. All 23 tests passed. Independent seasonal grouping
+and lead-12 validation/test metrics matched. Same source hashes, windows and
+mask counts as persistence. Reports: reports/seasonal_average_sd_v1.json and .md.
+Pooled test MAE 28.0045, RMSE 53.3906, MAPE 19.9964%. Four sensors lack nonzero
+training values; global training fallback used. Source files unchanged. No
+packages installed, neural training, graph preprocessing or model implementation.
+
 ## Proposed next milestone — awaiting approval
 
-Add a training-only seasonal-average baseline, or start the STAEformer paper
-walkthrough and architecture specification. Explain the chosen scope before
-implementation. Neural training and attention models remain unapproved. Exact
-dependency/environment locking remains open before expensive experiments.
+Focused BigST/PatchSTG architecture and feasibility review. Trace components,
+input/output shapes, author-code discrepancies and preprocessing requirements;
+resolve BigST long-history variant and matched forecast origins. Propose
+PatchSTG-first implementation and a feasible GPU experiment budget. No neural
+implementation or training is authorized by the documentation-scope update.
+Environment locking, immutable source references and code-license review remain
+prerequisites for research-model experiments. See roadmap.md for tentative dates.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. 17 pipeline/evaluation tests pass. Real-data loading and deterministic baseline
+library. 23 pipeline/baseline/evaluation tests pass. Real-data loading and deterministic baseline
 evaluation completed; measured accuracy results are recorded without neural claims.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.
+
+## Learning documentation
+
+Added workflow.md at the user’s request to explain completed milestones, their
+purpose, design choices, verification, measured results and remaining limits.
+No new implementation milestone started.

@@ -1,18 +1,23 @@
-# Initial model compatibility review
+# Model compatibility: active BigST/PatchSTG scope
 
-Reviewed: 2026-11-08. This is a planning review, not completed equation-by-equation
+Reviewed: 2026-11-08. Deadline: November 24, 2026.
+
+Active models are BigST and PatchSTG. ASTGCN/STAEformer notes below are archived
+context, not implementation priorities. See [roadmap](roadmap.md).
+
+ This is a planning review, not completed equation-by-equation
 verification. No author code was copied or executed. References are moving branch
 URLs unless a paper version is specified; freeze source commits before adapting.
 Licenses for all incorporated code and dataset artifacts must be checked then.
 
 | Model | Core mechanism | Inputs / prerequisites | Implication for SD comparison |
 | --- | --- | --- | --- |
-| ASTGCN (2019) | Spatial/temporal attention with Chebyshev graph convolution and temporal convolution | Graph; full paper uses recent, daily, weekly histories | Full ASTGCN has more history than a recent-only benchmark; label ASTGCN-r explicitly if used |
-| STAEformer (2023) | Adaptive spatio-temporal embeddings and temporal/spatial dot-product attention | Traffic, time-of-day/day-of-week; learned embeddings indexed by sensor and history position; no predefined adjacency required | A useful first research implementation; SD is a new setting and dense spatial attention needs memory measurement |
+| ASTGCN (2019) | Spatial/temporal attention with Chebyshev graph convolution and temporal convolution | Graph; full paper uses recent, daily, weekly histories | Deferred beyond deadline; full and recent-only variants differ |
+| STAEformer (2023) | Adaptive spatio-temporal embeddings and temporal/spatial dot-product attention | Traffic, time-of-day/day-of-week; learned embeddings indexed by sensor and history position; no predefined adjacency required | Deferred beyond deadline; SD would require an adapted evaluation |
 | BigST (2024) | Long-sequence feature extraction plus linearized global spatial convolution | Short and long/periodic histories; preprocessing/training for long features; spatial prior in paper | SD flow differs from original speed datasets; full and short-history versions are distinct experiments |
 | PatchSTG (KDD 2025) | Irregular spatial patches and alternating depth/breadth attention | Traffic/calendar/node embeddings, coordinates, similarity-based padding and sensor index mappings | Best initial protocol anchor because author SD configuration exists; padding and index restoration need dedicated tests |
 
-## ASTGCN fidelity issue
+## Archived: ASTGCN fidelity issue (deferred)
 
 The [paper](https://guoshnbjtu.github.io/pdfs/AAAI2019-GuoS.2690.pdf) models recent,
 daily, and weekly dependencies. The [author PyTorch README](https://github.com/guoshnBJTU/ASTGCN-2019-pytorch)
@@ -22,15 +27,14 @@ Full-history comparisons require common eligible forecast origins, accounting
 for the longest lookback in every model. The graph construction and Laplacian
 conventions must also be recorded.
 
-## STAEformer implementation priority
+## Archived: STAEformer review (deferred)
 
 The [paper, arXiv v5](https://arxiv.org/html/2308.10425v5) describes feature,
 periodic, and adaptive embeddings with attention along both axes. The
 [author model](https://github.com/XDZhelheim/STAEformer/blob/main/model/STAEformer.py)
 provides a compact reference for tracing shapes and attention behavior.
-Recommend implementing it first after persistence/seasonal baselines and metric
-verification: it introduces attention without graph convolution or patch-index
-machinery. An independent implementation on SD is an adapted evaluation, not an
+The earlier recommendation to implement it first is superseded by the
+BigST/PatchSTG deadline scope. No STAEformer implementation was started. An independent implementation on SD is an adapted evaluation, not an
 official reproduction. Existing sensor embeddings also mean cross-network
 transfer must not be assumed without retraining or a documented adaptation.
 
@@ -58,22 +62,23 @@ model milestone rather than silently picking one.
 
 The [loader](https://github.com/LMissher/PatchSTG/blob/main/lib/data_loader.py)
 uses a global training mean/std, permits previous-split history as context, and
-constructs calendar indices from row numbers. Our calendar features should be
-based on validated timestamps; a different weekday origin is a documented change.
+constructs calendar indices from row numbers. Our NPZ lacks timestamps, so the approved pipeline reconstructs an explicitly
+assumed 2019 calendar with Monday=0; this origin is a documented adaptation.
 The [utilities](https://github.com/LMissher/PatchSTG/blob/main/lib/utils.py) use
 training data to construct similarity if no cached adjacency exists, but reuse
 an existing cache without checking its provenance. Cache identity must include
 training split and sensor order. Coordinate partitioning uses static metadata;
 similarity fitting must not use validation/test traffic.
 
-## Proposed comparison tracks
+## Deadline comparison plan
 
-1. Shared short-history benchmark: same origins, 12-to-12 task, same calendar
-   availability and metrics; retain required graph/coordinate inputs and disclose
-   their unequal information. Label ASTGCN-r and BigST variants accurately.
-2. Architecture-complete track: retain full periodic/long-history components,
-   match eligible origins across models, and report added history and costs.
-3. Paper-settings reproduction: separate runs with original dataset/protocol,
-   only when feasible. Never compare their scores as a single controlled table.
+Compare BigST and PatchSTG on SD with the existing baselines. Resolve the BigST
+variant before implementation. If short-history only, label it explicitly; if
+using the full long-history extractor, disclose extra information and cost,
+match eligible origins and revisit baseline reports when necessary. Do not
+commit to separate reproduction tracks or extra datasets before the deadline.
 
-Model selection is provisional. Add newer papers only after this pipeline works.
+Proposed implementation order: PatchSTG first, then BigST. This replaces the
+STAEformer-first recommendation. The next milestone is a focused architecture
+and feasibility review, with implementation/training separately approved. See
+[deadline roadmap](roadmap.md). No large-network scalability claims from SD alone.

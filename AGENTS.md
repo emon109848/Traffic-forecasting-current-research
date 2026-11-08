@@ -1,5 +1,13 @@
 # Project workflow
 
+## Current deliverable
+
+- Deadline: November 24, 2026. Active research models: BigST and PatchSTG only.
+- Dataset: processed SD 2019; retain existing persistence/seasonal baselines.
+- ASTGCN/STAEformer, additional datasets and broad scalability trials are deferred.
+- Follow docs/roadmap.md; do not restart deferred model work from historical notes.
+- On one network size, describe efficiency on SD, not demonstrated scalability.
+
 ## Scope and approvals
 
 - Work on one approved task or milestone at a time.

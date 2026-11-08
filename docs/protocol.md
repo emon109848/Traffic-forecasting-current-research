@@ -2,7 +2,8 @@
 
 Status: general protocol checklist. Processed-SD assumptions and zero-target
 masking are approved in benchmark_proposal.md; other settings remain proposed.
-No experiments have been run.
+Two simple baselines have been evaluated; no research-model experiments exist.
+Deadline scope: BigST vs PatchSTG on SD 2019, November 24, 2026. See roadmap.md.
 
 ## Experiment identity
 
@@ -43,7 +44,7 @@ Define aggregation over sensors, samples, and horizons, including whether RMSE
 is computed from pooled squared errors. Report per-horizon and aggregate scores,
 seed variability, and valid-target counts/coverage.
 
-## Efficiency and scaling
+## Efficiency on SD
 
 Record hardware, software, batch size, input/output shapes, precision, warm-up,
 CUDA synchronization, repetitions, and timing scope. Separate training time per
@@ -52,8 +53,9 @@ auxiliary training costs. Record peak allocated/reserved GPU memory and paramete
 counts with explicit counting conventions. Compare fixed workloads and separately
 report maximum feasible workloads. Preserve out-of-memory outcomes.
 
-Define sensor subsets and graph/patch reconstruction before scalability trials;
-node count alone does not control geography or topology.
+Additional network sizes and scalability trials are deferred. Current efficiency
+claims must be limited to the 716-sensor SD workload. If scaling experiments are
+authorized later, define sensor subsets and graph/patch reconstruction first.
 
 ## Reproducibility and interpretation
 

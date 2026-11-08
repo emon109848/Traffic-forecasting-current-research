@@ -1,5 +1,10 @@
 # SD acquisition review
 
+The inspected SD artifacts remain the only dataset for the BigST/PatchSTG
+deadline scope (November 24, 2026). Further original-data acquisition is deferred;
+known provenance and missingness limits remain explicit. See
+[roadmap](../roadmap.md).
+
 Status: local traffic and metadata inspection complete; provenance limits remain. Reviewed 2026-11-08.
 
 The [PatchSTG author repository](https://github.com/LMissher/PatchSTG) links its
@@ -26,12 +31,14 @@ reading worked, but Drive listing/Kaggle metadata were inaccessible. No data
 was acquired, and no shape, value, timestamp, missingness or checksum audit has
 been performed. The JSON manifest records unknown values explicitly.
 
-To resume, obtain a listing of the SD-only files and sizes from the author Drive
+Historical acquisition plan (local files have since been supplied): obtain a
+listing of the SD-only files and sizes from the author Drive
 folder, including any README or usage terms. Once those are visible, select the
 smallest suitable source and acquire it locally. Prefer timestamp-bearing source
 data if processed NPZ files omit timestamps or validity information. Inspect
 arrays without pickle, preserve originals, compute SHA-256 checksums, and verify
-metadata IDs/order before deciding whether it supports the proposed benchmark.
+metadata IDs/order before deciding whether it supports the proposed benchmark. The local audits
+below supersede the earlier acquisition blocker.
 
 ## Local traffic-array inspection
 
@@ -48,7 +55,7 @@ zero; four frames are zero across all sensors. These are audit findings, not
 proof that all zero readings are missing. Preserve zeros until a documented
 validity policy is chosen. See sd_array_audit.json for indices and SHA-256.
 
-Next within the approved acquisition/inspection milestone: obtain sd_meta.csv
+At that stage, the next inspection step was to obtain sd_meta.csv
 from the author repository, establish sensor-order provenance and investigate
 timestamp/missingness evidence. Do not invent timestamps or silently map NPZ
 columns to metadata row order. No preprocessing or training has been performed.
@@ -74,7 +81,7 @@ be recovered from these two files alone. The four all-zero frames are indices
 6536–6539; their cause and calendar time remain unknown. Dataset terms and an
 immutable source revision also remain unresolved.
 
-Before preprocessing, choose explicitly whether to proceed with this processed
-benchmark and documented assumptions or obtain timestamp-bearing original data.
-If proceeding, label calendar reconstruction and zero handling as protocol
-choices, not observed facts. No baseline or model should start before that choice.
+The user subsequently approved proceeding with this processed benchmark and
+documented assumptions. Calendar reconstruction and zero handling are protocol
+choices, not observed facts. The shared pipeline and simple baselines are now
+complete; obtaining original timestamp-bearing data is deferred.

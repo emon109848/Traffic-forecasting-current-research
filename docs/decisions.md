@@ -1,5 +1,8 @@
 # Decision log
 
+Entries preserve historical choices; later entries supersede earlier proposals.
+Current scope is BigST/PatchSTG on SD 2019 by November 24, 2026 (roadmap.md).
+
 ## 2026-11-08 — Minimal foundation only
 
 Status: accepted for milestone 1.
@@ -102,3 +105,33 @@ latest values, including zero, with no fitting. Evaluate validation/test without
 tuning, and store implementation/source hashes and dirty Git status alongside
 results. Full reports and curated tables are under reports/. No inference-speed
 claim is derived from evaluation wall time.
+
+## 2026-11-08 — Seasonal-average educational baseline
+
+Status: implemented and evaluated in approved milestone.
+
+Fit weekday/15-minute-slot/sensor means from nonzero training readings only.
+Fallback is sensor nonzero training mean, then global nonzero training mean;
+reject all-zero training data. No online updates or test tuning. Use the approved
+assumed calendar and identical persistence windows/metrics. Source and run
+provenance, fallback diagnostics and measured comparisons are stored in reports/.
+This fitting rule does not change pipeline input-zero or normalization policies.
+
+## 2026-11-08 — Narrow deadline scope to BigST and PatchSTG
+
+Status: accepted; user requested all documentation reflect the narrowed project.
+
+Deadline November 24, 2026. Retain processed SD 2019, shared pipeline, masks,
+metrics, tests and measured persistence/seasonal baselines. Defer ASTGCN and
+STAEformer, new model searches, extra datasets, broad tuning and scalability
+trials. This supersedes STAEformer-first and multi-track model plans.
+
+Next proposed milestone: review BigST/PatchSTG architecture and GPU feasibility,
+resolve BigST long-history variant and common origins, and scope implementation.
+Propose PatchSTG first, then BigST. Exact author-code adaptation is not yet
+selected; license/source review and fidelity labels remain required.
+
+Report SD accuracy/efficiency without larger-network scalability claims. Use
+measured runtimes to freeze the seed/experiment budget; three seeds desirable
+but not promised. Preserve Nov 22–24 for documentation and submission.
+No neural implementation or training authorized by this documentation update.

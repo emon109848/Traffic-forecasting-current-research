@@ -1,5 +1,9 @@
 # Conda environment validation
 
+Current scope: BigST and PatchSTG on SD 2019 by November 24, 2026. These
+smoke checks do not prove either model fits the GPU. Capture the environment
+specification before research-model runs; see [roadmap](roadmap.md).
+
 Status: CPU and host PyTorch CUDA smoke checks passed. Updated 2026-11-08.
 
 ## Candidate environment
@@ -40,12 +44,11 @@ test for future data packages and research implementations.
 - Strict command exit status: 1, correctly reflecting unavailable CUDA.
 
 The user separately demonstrated host GPU visibility with nvidia-smi. Session
-restrictions prevent completing host CUDA validation from here. User-run output
-from the command above is needed before declaring GPU readiness. No environment
+restrictions prevent completing host CUDA validation from here. At that stage, user-run output was needed before declaring GPU readiness;
+the successful host result below resolves that request. No environment
 lock or environment.yml has been generated: freezing all unrelated pml packages
 would misrepresent project requirements, and a new installation is not needed to
-resolve this check. Record the host result before choosing whether to retain pml
-or create a dedicated environment.
+resolve this check. The later host result supports retaining pml as recorded below.
 
 ## User-terminal result — validation complete
 
