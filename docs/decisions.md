@@ -79,3 +79,14 @@ from loss and metrics following the reference evaluation convention, documenting
 that genuine zero flow cannot be distinguished from filled missing values.
 Preserve originals. Input imputation, scaler zero inclusion, exact calendar
 indexing and pipeline implementation are not approved by this decision.
+
+## 2026-11-08 — Data pipeline implementation
+
+Status: implemented within the approved data-pipeline milestone.
+
+Preserve zero inputs; include them in global training-only scaler statistics,
+following the reference loader. No imputation or frame deletion. Use strict target
+split boundaries and lazy 12-to-12 windows. Reconstruct a timezone-naive regular
+calendar from assumed 2019-01-01, Monday=0, explicitly adapting reference calendar
+indexing. Return original-unit targets with separate zero-exclusion mask.
+Use unittest with installed NumPy/PyTorch; no test dependency installation needed.

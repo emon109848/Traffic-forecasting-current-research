@@ -31,7 +31,7 @@ averages source readings into 15-minute bins, rounds and fills NaNs with zero.
 Preserve the downloaded artifacts. No source-validity mask can be recovered from
 this NPZ. Hosted data terms remain unresolved; data stays outside Git.
 
-## Split and window rules — proposed
+## Split and window rules — implemented for the approved pipeline
 
 For exactly T=35,040 verified ordered frames, split by target timestamps at
 floor(0.6T)=21,024 and T-floor(0.2T)=28,032. Training targets have indices below
@@ -57,12 +57,16 @@ predictions by extending the target mask. Empty valid sets must produce a clear
 undefined/skip outcome, not a perfect zero score. Define training-batch behavior
 for empty masks during implementation planning.
 
-## Remaining preprocessing and metric proposals
+## Pipeline preprocessing decisions
 
-Normalization statistics must use training observations only. Whether statistics
-include zero inputs, and whether/how input zeros are imputed, are not selected
-by the zero-target masking decision. No automatic forward filling or deletion
-of all-zero frames is approved. Resolve these details before the data pipeline.
+The approved pipeline milestone implements training-only global mean/std including
+zeros, unchanged zero inputs, no imputation and no frame deletion. Calendar is
+explicitly reconstructed from assumed 2019-01-01 00:00 at 15-minute cadence,
+Monday=0, without timezone/DST adjustment. See data_pipeline.md for the contract
+and tests. This does not verify original timestamps. Targets stay in original
+units and the zero-exclusion mask is returned separately.
+
+## Remaining metric proposals
 
 Propose original-unit MAE, pooled RMSE and percentage MAPE on the nonzero valid
 target mask. Exact near-zero handling, aggregation, scaling guards and tests
@@ -102,4 +106,4 @@ archive size. Before benchmark freeze: inspect actual data, missing-value semant
 calendar, resampling and exact split counts. Before training: verify GPU access,
 environment compatibility, baseline tests and model fidelity records.
 Environment validation and local dataset inspection are complete. Data pipeline
-implementation remains a separate milestone requiring approval.
+is implemented and tested; baselines and training require a separate approval.

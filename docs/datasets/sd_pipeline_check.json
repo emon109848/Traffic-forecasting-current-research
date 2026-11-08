@@ -1,0 +1,103 @@
+{
+  "shape": [
+    35040,
+    716,
+    1
+  ],
+  "source_dtype": "float64",
+  "scaler": {
+    "mean": 247.19353447084683,
+    "std": 184.27468320611501
+  },
+  "scaler_zero_policy": "include_training_zeros",
+  "input_zero_policy": "preserve_no_imputation",
+  "target_mask": "target != 0",
+  "history": 12,
+  "horizon": 12,
+  "stride": 1,
+  "calendar": {
+    "status": "assumed_not_observed",
+    "start": "2019-01-01T00:00:00",
+    "cadence_minutes": 15,
+    "timezone": null,
+    "weekday_encoding": "Monday=0"
+  },
+  "sensor_alignment": "assumed_metadata_row_order",
+  "files": {
+    "flowsd.npz": {
+      "sha256": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c"
+    },
+    "sd_meta.csv": {
+      "sha256": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+    }
+  },
+  "splits": {
+    "train": {
+      "target_interval": [
+        0,
+        21024
+      ],
+      "windows": 21001,
+      "first_target_start": 12,
+      "last_target_start": 21012,
+      "zero_fraction_in_split_frames": 0.016880149741078033,
+      "batch_x_shape": [
+        2,
+        12,
+        716,
+        1
+      ],
+      "batch_y_shape": [
+        2,
+        12,
+        716,
+        1
+      ]
+    },
+    "val": {
+      "target_interval": [
+        21024,
+        28032
+      ],
+      "windows": 6997,
+      "first_target_start": 21024,
+      "last_target_start": 28020,
+      "zero_fraction_in_split_frames": 0.029115567842657075,
+      "batch_x_shape": [
+        2,
+        12,
+        716,
+        1
+      ],
+      "batch_y_shape": [
+        2,
+        12,
+        716,
+        1
+      ]
+    },
+    "test": {
+      "target_interval": [
+        28032,
+        35040
+      ],
+      "windows": 6997,
+      "first_target_start": 28032,
+      "last_target_start": 35028,
+      "zero_fraction_in_split_frames": 0.03261376463610622,
+      "batch_x_shape": [
+        2,
+        12,
+        716,
+        1
+      ],
+      "batch_y_shape": [
+        2,
+        12,
+        716,
+        1
+      ]
+    }
+  },
+  "numpy": "2.5.4"
+}

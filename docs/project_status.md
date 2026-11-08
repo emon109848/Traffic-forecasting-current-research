@@ -63,17 +63,27 @@ metadata row order is paired with NPZ columns; the published 2019/15-minute
 setting is assumed rather than independently verified; zero targets are excluded
 from loss and metrics. Preserve original files. See benchmark_proposal.md.
 
+## Data pipeline milestone — complete
+
+Implemented src/traffic_benchmark/data/pipeline.py, synthetic tests and
+scripts/inspect_pipeline.py. See docs/data_pipeline.md for decisions and usage.
+Train-only global scaling includes zeros; zero inputs unchanged. Targets remain
+original-unit values with separate exclusion mask. Strict target boundaries,
+lazy windows, assumed calendar and metadata row order are explicit.
+Real data yields 21,001 / 6,997 / 6,997 windows; source hashes unchanged.
+No training, imputation, artifact conversion or dependency installation.
+
 ## Proposed next milestone — awaiting approval
 
-Build the reusable data pipeline and important tests. Before implementation,
-explain exact input-zero treatment, training-only normalization, assumed calendar
-indexing, target split boundaries and window shapes. Implement loading, window
-generation and leakage checks only after approval of that milestone. No model
-training or baselines are authorized yet.
+Implement masked MAE/RMSE/MAPE evaluation and persistence baseline, with tests
+for aggregation, zero exclusion, nonfinite predictions and empty masks. Evaluate
+baseline only after protocol details are explained. No attention models or
+neural training yet. Exact dependency/environment locking remains open.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. No forecasting tests or experiments exist; no scientific results claimed.
+library. Data-pipeline tests and a real-file loading check pass; no forecast experiments
+or accuracy results exist.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.

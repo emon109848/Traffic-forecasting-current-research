@@ -7,8 +7,9 @@ and scalability under explicit experimental conditions.
 
 ## Current status
 
-Milestones 1–2: repository foundation and initial compatibility review. No datasets, forecasting models,
-training pipeline, or experimental results exist yet.
+Foundation, compatibility review, environment validation, dataset inspection and
+the reusable data pipeline are complete. Local SD data is excluded from Git.
+No forecasting models, training loop, or accuracy results exist yet.
 
 Initial model candidates are ASTGCN (2019), STAEformer (2023), BigST (2024), and
 PatchSTG (KDD 2025). Inclusion and implementation order remain provisional.
@@ -28,10 +29,9 @@ Each major milestone requires approval before work starts.
 
 ## Development
 
-The source package uses a `src/` layout. No third-party dependencies are declared
-yet. Conda is the chosen environment manager. Python/PyTorch/CUDA versions and an environment lock will be selected after
-checking hardware and model compatibility. Python 3.14.7 was observed in the
-initial shell; it is not an endorsed training environment.
+The source package uses a `src/` layout with NumPy and PyTorch dependencies.
+Use Conda environment `pml`: the pipeline was checked with Python 3.14.8,
+PyTorch 2.14.1+cu130 and NumPy 2.5.4. An exact environment lock remains pending.
 
 A dependency-free scaffold check from the repository root:
 
@@ -41,12 +41,13 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -c "import traffic_benchmark"
 
 Use the existing `pml` Conda environment for current development. No packages
 were changed during validation. A minimal `environment.yml` remains pending
-selection and verification of data-pipeline dependencies.
+a complete dependency-locking step; installed NumPy/PyTorch were reused.
 Installation and training instructions will be added when validated. Git is initialized and a GitHub remote is configured. CPU and CUDA smoke checks passed in the user’s `pml` environment on an RTX
 5060 Laptop GPU. This agent session has separate GPU access restrictions.
 
 ## Project records
 
+- [Data pipeline and test commands](docs/data_pipeline.md)
 - [Conda validation instructions](docs/environment_validation.md)
 - [Environment audit](docs/environment_audit.md)
 - [Model compatibility review](docs/model_compatibility.md)

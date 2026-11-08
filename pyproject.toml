@@ -7,8 +7,9 @@ name = "traffic-attention-benchmark"
 version = "0.1.0"
 description = "A reproducible comparative study of attention-based traffic forecasting models"
 readme = "README.md"
-dependencies = []
+dependencies = ["numpy", "torch"]
 
-# Python constraints and training dependencies await compatibility review.
+# Validated environment versions are recorded in docs/environment_validation.md.
+# These declarations are package requirements, not an exact experiment lock.
 [tool.setuptools.packages.find]
 where = ["src"]
