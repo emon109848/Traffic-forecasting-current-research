@@ -1,0 +1,55 @@
+{
+  "path": "data/raw/largest_sd/flowsd.npz",
+  "bytes": 200709382,
+  "sha256": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+  "arrays": {
+    "data": {
+      "shape": [
+        35040,
+        716,
+        1
+      ],
+      "dtype": "float64",
+      "values": 25088640,
+      "nonfinite": 0,
+      "zeros": 563841,
+      "negative": 0,
+      "minimum": 0.0,
+      "maximum": 999.0,
+      "mean": 244.30955360673198,
+      "quantiles": [
+        0.0,
+        0.0,
+        81.0,
+        214.0,
+        376.0,
+        724.0,
+        999.0
+      ],
+      "per_channel": [
+        {
+          "channel": 0,
+          "minimum": 0.0,
+          "maximum": 999.0,
+          "zeros": 563841
+        }
+      ],
+      "all_zero_sensors": 0,
+      "all_zero_frames": 4,
+      "all_zero_frame_indices": [
+        6536,
+        6537,
+        6538,
+        6539
+      ],
+      "zero_percent": 2.247395634039948
+    }
+  },
+  "archive_members": [
+    {
+      "name": "data.npy",
+      "bytes_uncompressed": 200709248,
+      "bytes_compressed": 200709248
+    }
+  ]
+}

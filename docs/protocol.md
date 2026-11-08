@@ -1,7 +1,8 @@
 # Experimental protocol outline
 
-Status: draft checklist, not a frozen benchmark protocol. No numerical defaults
-have been selected and no experiments have been run.
+Status: general protocol checklist. Processed-SD assumptions and zero-target
+masking are approved in benchmark_proposal.md; other settings remain proposed.
+No experiments have been run.
 
 ## Experiment identity
 
@@ -13,7 +14,9 @@ implementation category, paper version, source commit, and all deviations.
 Specify source, license/access terms, version, checksums, sensor IDs/order,
 coordinates/graph provenance, target variable and units, dates, timezone,
 sampling interval, and any resampling. Audit missing values and outages; do not
-assume zero is missing. Record available metadata and calendar inputs.
+infer that every zero is missing. For processed SD, zero-target exclusion is an
+approved benchmark convention because original validity flags are unavailable.
+Record available metadata and calendar inputs.
 
 ## Temporal protocol and leakage
 

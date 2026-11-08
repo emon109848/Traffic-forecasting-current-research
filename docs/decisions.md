@@ -66,3 +66,16 @@ User-terminal CPU and CUDA smoke checks passed with Python 3.14.8,
 torch 2.14.1+cu130 and NumPy 2.5.4 on RTX 5060 Laptop GPU (compute capability
 12.0). No environment replacement is currently necessary. Reassess compatibility
 as data/model dependencies are introduced; this is not a final dependency lock.
+
+## 2026-11-08 — Approved processed SD assumptions and zero-target exclusion
+
+Status: accepted explicitly by user. Supersedes the initial include-zero-target
+proposal for this processed dataset only.
+
+Proceed with local author-processed SD data; preserve metadata row order and
+assume author pairing with traffic columns. Treat published 2019 / 15-minute
+calendar as an assumption because timestamps are absent. Exclude zero targets
+from loss and metrics following the reference evaluation convention, documenting
+that genuine zero flow cannot be distinguished from filled missing values.
+Preserve originals. Input imputation, scaler zero inclusion, exact calendar
+indexing and pipeline implementation are not approved by this decision.

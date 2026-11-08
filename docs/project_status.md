@@ -43,17 +43,37 @@ without package changes. See environment_validation.md for user-reported output
 and limits. Agent-session GPU restrictions remain; host execution works.
 No final dependency lock or minimal environment.yml exists yet.
 
+## Dataset acquisition and local inspection — complete with limitations
+
+User supplied flowsd.npz and sd_meta.csv. Original files unchanged and ignored
+by Git. SHA-256 hashes and inspections recorded under docs/datasets/.
+Traffic is float64 (35,040,716,1); metadata has 716 unique IDs, valid unique
+coordinates and contiguous source ID2 indices 6931–7646. No empty metadata
+fields. Traffic contains 563,841 zeros and four all-zero frames (6536–6539).
+
+Available artifacts are structurally consistent, but sensor-column alignment,
+original timestamps, exact missingness semantics and hosted data terms are not
+independently established. Do not claim these gates were verified. No graph
+acquired, preprocessing applied, or experiments run.
+
+## Data protocol decisions — approved
+
+User approved using processed author artifacts with documented assumptions:
+metadata row order is paired with NPZ columns; the published 2019/15-minute
+setting is assumed rather than independently verified; zero targets are excluded
+from loss and metrics. Preserve original files. See benchmark_proposal.md.
+
 ## Proposed next milestone — awaiting approval
 
-Dataset acquisition and inspection only: verify an accessible LargeST-SD 2019
-source, licensing/provenance and expected size before downloading, then inspect
-shapes, sensor order, timestamps, cadence, flow units and missingness. Produce
-a dataset manifest and audit report. Do not implement preprocessing, training,
-or models in that milestone. If source access or size prevents the proposed
-acquisition, report the concrete issue before expanding the download scope.
+Build the reusable data pipeline and important tests. Before implementation,
+explain exact input-zero treatment, training-only normalization, assumed calendar
+indexing, target split boundaries and window shapes. Implement loading, window
+generation and leakage checks only after approval of that milestone. No model
+training or baselines are authorized yet.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
 library. No forecasting tests or experiments exist; no scientific results claimed.
-No packages, datasets, repositories, or model weights were downloaded to disk.
+No packages, repositories or model weights were downloaded by the agent.
+The traffic dataset was downloaded by the user and inspected locally.

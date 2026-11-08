@@ -1,0 +1,64 @@
+{
+  "path": "data/raw/largest_sd/sd_meta.csv",
+  "bytes": 47979,
+  "sha256": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a",
+  "columns": [
+    "ID",
+    "Lat",
+    "Lng",
+    "District",
+    "County",
+    "Fwy",
+    "Lanes",
+    "Type",
+    "Direction",
+    "ID2"
+  ],
+  "rows": 716,
+  "traffic_shape": [
+    35040,
+    716,
+    1
+  ],
+  "row_count_matches_sensor_axis": true,
+  "unique_sensor_ids": 716,
+  "duplicate_sensor_ids": [],
+  "unique_ID2": 716,
+  "ID2_range": [
+    6931,
+    7646
+  ],
+  "ID2_strictly_increasing": true,
+  "ID2_contiguous": true,
+  "latitude_range": [
+    32.544296,
+    33.406738
+  ],
+  "longitude_range": [
+    -117.591561,
+    -116.880704
+  ],
+  "invalid_coordinates": 0,
+  "duplicate_coordinate_groups": [],
+  "district_counts": {
+    "11": 716
+  },
+  "county_counts": {
+    "San Diego": 716
+  },
+  "missing_fields": {
+    "ID": 0,
+    "Lat": 0,
+    "Lng": 0,
+    "District": 0,
+    "County": 0,
+    "Fwy": 0,
+    "Lanes": 0,
+    "Type": 0,
+    "Direction": 0,
+    "ID2": 0
+  },
+  "first_sensor_id": "1114091",
+  "last_sensor_id": "1122412",
+  "alignment_status": "count_consistent_but_npz_sensor_ids_absent"
+}

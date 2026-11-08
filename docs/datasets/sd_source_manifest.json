@@ -1,0 +1,48 @@
+{
+  "dataset_candidate": "LargeST-SD 2019 / PatchSTG processed SD",
+  "status": "local_array_and_metadata_inspected_provenance_limits_documented",
+  "review_date": "2026-11-08",
+  "sources": {
+    "original_repository": "https://github.com/liuxu77/LargeST",
+    "original_host": "https://www.kaggle.com/datasets/liuxu77/largest",
+    "reference_repository": "https://github.com/LMissher/PatchSTG",
+    "processed_folder": "https://drive.google.com/drive/folders/1BDH1C66BCKBe7ge8G-rBaj1j3p0iR0TC"
+  },
+  "expected_not_observed": {
+    "year": 2019,
+    "sensors": 716,
+    "frames": 35040,
+    "cadence_minutes": 15,
+    "target": "flow"
+  },
+  "files": [
+    {
+      "path": "data/raw/largest_sd/flowsd.npz",
+      "bytes": 200709382,
+      "sha256": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+      "acquisition": "User downloaded from author-linked Google Drive folder; reported in conversation."
+    },
+    {
+      "path": "data/raw/largest_sd/sd_meta.csv",
+      "bytes": 47979,
+      "sha256": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a",
+      "source_url": "https://github.com/LMissher/PatchSTG/blob/main/data/SD/sd_meta.csv",
+      "acquisition": "User saved author repository metadata locally."
+    }
+  ],
+  "dataset_license": null,
+  "download_bytes": 200757361,
+  "checksums": {
+    "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+    "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+  },
+  "timestamps_verified": false,
+  "sensor_alignment_verified": false,
+  "limitations": [
+    "NPZ contains data only: timestamps, sensor IDs and validity mask absent.",
+    "Array shape is consistent with SD 2019 but does not independently verify dates, cadence or sensor order.",
+    "Zero readings cannot be separated into genuine zero flow and imputed missing values from this file alone.",
+    "Hosted dataset usage terms remain unverified; do not redistribute data.",
+    "Metadata row count/IDs/coordinates validated locally; NPZ column-to-ID alignment and graph provenance remain unverified."
+  ]
+}

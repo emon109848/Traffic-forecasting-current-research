@@ -1,6 +1,7 @@
 # First benchmark proposal
 
-Status: proposed for review; no dataset acquired or protocol frozen.
+Status: processed-data assumptions and zero-target policy approved; remaining
+pipeline and experiment settings are proposals. Local artifacts acquired.
 Reviewed: 2026-11-08.
 
 ## Recommended task
@@ -12,22 +13,23 @@ This follows the setting described by the [PatchSTG paper](https://arxiv.org/htm
 and [SD config](https://github.com/LMissher/PatchSTG/blob/main/config/SD.conf).
 It is a shared benchmark proposal, not a promise to reproduce published scores.
 
-## Data acquisition and identity — pending
+## Approved processed-data assumptions
 
-The [LargeST repository](https://github.com/liuxu77/LargeST) links to Kaggle CA
-files and describes deriving regional subsets. Prefer an auditable 2019 source
-with metadata and graph. Author-provided PatchSTG SD files are an alternative
-only after their provenance, sensor order, dates, preprocessing, and usage terms
-are verified. Do not download all five years merely to obtain a one-year subset.
-Whether selective acquisition is practical remains to be checked.
+The user approved continuing with author-provided flowsd.npz and sd_meta.csv
+rather than obtaining original timestamp-bearing data. Local inspections and
+checksums are recorded in docs/datasets/. Preserve metadata row order and assume
+it corresponds to NPZ sensor columns, following the author artifact pairing.
+The NPZ has no sensor IDs, so independent alignment verification is unavailable.
 
-The [LargeST preparation notebook](https://github.com/liuxu77/LargeST/blob/main/data/ca/process_ca_his.ipynb)
-resamples to 15-minute means, rounds, then fills missing values with zero.
-Thus the published processed target is a rounded mean of source readings, not a
-sum of vehicles over 15 minutes. Preserve source units and explicitly label this
-aggregation. Retain missingness before filling whenever source data permits.
-Exact bin alignment, timestamp timezone/DST behavior, duplicates and gaps remain
-data-audit gates; do not invent timestamps for an unverified processed array.
+Use the published 2019 / 15-minute setting as an explicit temporal assumption.
+The NPZ has no timestamps; exact start time, gaps, timezone and DST cannot be
+independently checked. Any reconstructed calendar must be marked assumed, not
+observed. Exact calendar indexing will be specified before implementation.
+
+The [LargeST notebook](https://github.com/liuxu77/LargeST/blob/main/data/ca/process_ca_his.ipynb)
+averages source readings into 15-minute bins, rounds and fills NaNs with zero.
+Preserve the downloaded artifacts. No source-validity mask can be recovered from
+this NPZ. Hosted data terms remain unresolved; data stays outside Git.
 
 ## Split and window rules — proposed
 
@@ -41,24 +43,31 @@ the manifest once real timestamps are checked. This is an explicit project rule;
 the [LargeST generation script](https://github.com/liuxu77/LargeST/blob/main/data/generate_data_for_training.py)
 splits origin indices instead, so matching a 60/20/20 ratio is not exact equivalence.
 
-## Normalization, missing data, and metrics — proposed
+## Approved zero-target policy
 
-Fit one global scalar mean/std on valid training flow observations, normalize
-only the traffic channel, and guard against zero variance. Validity excludes
-nonfinite or source-flagged missing readings; zero alone is not evidence of
-missingness. Define input imputation after the audit; prefer causal forward fill
-with a training-only fallback and retain an input mask for diagnostics. No
-interpolation using observations after a forecast origin. If source validity
-cannot be recovered, state that limitation before choosing a masking policy.
-These rules may differ from author preprocessing and must be labeled accordingly.
+Exclude zero targets from training loss and evaluation metrics, following the
+reference author evaluation convention. This revises the earlier proposal to
+include genuine zero flow: the processed NPZ cannot distinguish genuine zeros
+from missing readings replaced by zero. This is an operational benchmark mask,
+not a claim that every zero is missing. Preserve original values and report the
+excluded-target fraction. The current array is finite and nonnegative.
 
-Compute original-unit MAE and pooled RMSE on valid targets, including valid zero
-flow. MAPE: 100 * mean(abs(pred-target)/abs(target)) over valid targets with
-abs(target)>=1 source flow unit. Report its coverage; this threshold is a project
-proposal, not an inferred paper rule. Empty valid sets produce an explicit
-undefined result, not zero. Aggregate by pooled valid observations and separately
-report each horizon. If reporting mean-of-horizon metrics, label them separately
-from pooled metrics. Never hide nonfinite predictions through masking.
+Reject or explicitly handle nonfinite targets/predictions; never hide invalid
+predictions by extending the target mask. Empty valid sets must produce a clear
+undefined/skip outcome, not a perfect zero score. Define training-batch behavior
+for empty masks during implementation planning.
+
+## Remaining preprocessing and metric proposals
+
+Normalization statistics must use training observations only. Whether statistics
+include zero inputs, and whether/how input zeros are imputed, are not selected
+by the zero-target masking decision. No automatic forward filling or deletion
+of all-zero frames is approved. Resolve these details before the data pipeline.
+
+Propose original-unit MAE, pooled RMSE and percentage MAPE on the nonzero valid
+target mask. Exact near-zero handling, aggregation, scaling guards and tests
+remain to be specified. Report each horizon and mask coverage; label a mean of
+horizon metrics separately from pooled metrics.
 
 ## Training and efficiency — proposed
 
@@ -83,7 +92,7 @@ Keep a source manifest with checksums, source URLs/versions, timestamps, sensor
 IDs, graph/coordinate order, preprocessing revision, split indices, and mask
 semantics. Store arrays once and generate windows lazily; no materialized
 sliding-window copies. Add tests for target split isolation, known window values,
-training-only scaler/imputation/graphs, valid zero targets, MAPE threshold and
+training-only scaler/imputation/graphs, approved zero-target exclusion, MAPE threshold and
 empty masks, pooled metric arithmetic, and metadata/sensor alignment.
 
 ## Approval gates
@@ -92,5 +101,5 @@ Before data acquisition: confirm source accessibility, licensing, and expected
 archive size. Before benchmark freeze: inspect actual data, missing-value semantics,
 calendar, resampling and exact split counts. Before training: verify GPU access,
 environment compatibility, baseline tests and model fidelity records.
-The next major milestone should resolve the environment first; dataset work
-remains separately approved.
+Environment validation and local dataset inspection are complete. Data pipeline
+implementation remains a separate milestone requiring approval.
