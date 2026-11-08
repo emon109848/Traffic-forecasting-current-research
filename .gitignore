@@ -1,0 +1,32 @@
+# Python and development environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Local secrets and environment-specific state
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+.DS_Store
+Thumbs.db
+
+# Large or generated artifacts
+/data/
+/runs/
+/checkpoints/
+*.pt
+*.pth
+*.ckpt
