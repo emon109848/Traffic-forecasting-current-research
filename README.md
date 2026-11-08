@@ -7,7 +7,7 @@ and scalability under explicit experimental conditions.
 
 ## Current status
 
-Milestone 1: minimal repository foundation. No datasets, forecasting models,
+Milestones 1–2: repository foundation and initial compatibility review. No datasets, forecasting models,
 training pipeline, or experimental results exist yet.
 
 Initial model candidates are ASTGCN (2019), STAEformer (2023), BigST (2024), and
@@ -39,13 +39,18 @@ A dependency-free scaffold check from the repository root:
 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -c "import traffic_benchmark"
 ```
 
-Use a dedicated Conda environment for this project. An `environment.yml` will be
-added after the compatibility review; no environment has been created yet.
-Installation and training instructions will be added when validated. The current
-workspace does not expose usable Git metadata; Git initialization is pending.
+Use the existing `pml` Conda environment for current development. No packages
+were changed during validation. A minimal `environment.yml` remains pending
+selection and verification of data-pipeline dependencies.
+Installation and training instructions will be added when validated. Git is initialized and a GitHub remote is configured. CPU and CUDA smoke checks passed in the user’s `pml` environment on an RTX
+5060 Laptop GPU. This agent session has separate GPU access restrictions.
 
 ## Project records
 
+- [Conda validation instructions](docs/environment_validation.md)
+- [Environment audit](docs/environment_audit.md)
+- [Model compatibility review](docs/model_compatibility.md)
+- [First benchmark proposal](docs/benchmark_proposal.md)
 - [Current status and next task](docs/project_status.md)
 - [Experimental protocol outline](docs/protocol.md)
 - [Decision log](docs/decisions.md)
