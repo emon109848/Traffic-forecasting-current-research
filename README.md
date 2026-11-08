@@ -9,7 +9,8 @@ and scalability under explicit experimental conditions.
 
 Foundation, compatibility review, environment validation, dataset inspection and
 the reusable data pipeline are complete. Local SD data is excluded from Git.
-No forecasting models, training loop, or accuracy results exist yet.
+A tested persistence baseline and measured results are available. No attention
+models or neural training loop exist yet.
 
 Initial model candidates are ASTGCN (2019), STAEformer (2023), BigST (2024), and
 PatchSTG (KDD 2025). Inclusion and implementation order remain provisional.
@@ -47,6 +48,8 @@ Installation and training instructions will be added when validated. Git is init
 
 ## Project records
 
+- [Persistence baseline results](reports/persistence_sd_v1.md)
+- [Evaluation rules](docs/evaluation.md)
 - [Data pipeline and test commands](docs/data_pipeline.md)
 - [Conda validation instructions](docs/environment_validation.md)
 - [Environment audit](docs/environment_audit.md)

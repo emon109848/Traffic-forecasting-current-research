@@ -66,12 +66,15 @@ Monday=0, without timezone/DST adjustment. See data_pipeline.md for the contract
 and tests. This does not verify original timestamps. Targets stay in original
 units and the zero-exclusion mask is returned separately.
 
-## Remaining metric proposals
+## Implemented evaluation rules
 
-Propose original-unit MAE, pooled RMSE and percentage MAPE on the nonzero valid
-target mask. Exact near-zero handling, aggregation, scaling guards and tests
-remain to be specified. Report each horizon and mask coverage; label a mean of
-horizon metrics separately from pooled metrics.
+Original-unit MAE, pooled RMSE and percentage MAPE use nonzero targets. No epsilon
+or additional threshold is applied to MAPE. Reject nonfinite predictions/targets
+and negative targets; do not clip finite predictions. Empty masks yield null.
+Accumulate float64 sums/counts across batches; report all horizons and pooled
+scores with valid-target coverage. See evaluation.md and reports/persistence_sd_v1.md.
+This supersedes earlier draft metric-threshold suggestions. Training-loss empty
+mask behavior remains for a later training milestone.
 
 ## Training and efficiency — proposed
 

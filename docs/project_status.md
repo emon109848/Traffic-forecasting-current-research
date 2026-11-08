@@ -73,17 +73,26 @@ lazy windows, assumed calendar and metadata row order are explicit.
 Real data yields 21,001 / 6,997 / 6,997 windows; source hashes unchanged.
 No training, imputation, artifact conversion or dependency installation.
 
+## Masked metrics and persistence milestone — complete
+
+Implemented streaming MAE/RMSE/percentage MAPE and deterministic persistence.
+17 tests pass; direct-array checks at leads 1/3/6/12 match on both splits.
+Measured results and provenance are in reports/persistence_sd_v1.json and .md.
+Pooled test MAE 60.7825, RMSE 94.3350, MAPE 41.7801%, valid targets 96.7400%.
+No training or parameter fitting; no packages installed. CLI stores full outputs
+in ignored runs/. Reports identify uncommitted code through implementation hashes.
+
 ## Proposed next milestone — awaiting approval
 
-Implement masked MAE/RMSE/MAPE evaluation and persistence baseline, with tests
-for aggregation, zero exclusion, nonfinite predictions and empty masks. Evaluate
-baseline only after protocol details are explained. No attention models or
-neural training yet. Exact dependency/environment locking remains open.
+Add a training-only seasonal-average baseline, or start the STAEformer paper
+walkthrough and architecture specification. Explain the chosen scope before
+implementation. Neural training and attention models remain unapproved. Exact
+dependency/environment locking remains open before expensive experiments.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. Data-pipeline tests and a real-file loading check pass; no forecast experiments
-or accuracy results exist.
+library. 17 pipeline/evaluation tests pass. Real-data loading and deterministic baseline
+evaluation completed; measured accuracy results are recorded without neural claims.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.

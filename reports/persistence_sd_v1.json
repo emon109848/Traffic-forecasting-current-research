@@ -1,0 +1,307 @@
+{
+  "baseline": "persistence",
+  "implementation": "independent educational baseline",
+  "created_utc": "2026-11-08T07:08:21.255676+00:00",
+  "config": {
+    "history": 12,
+    "horizon": 12,
+    "stride": 1,
+    "batch_size": 64,
+    "splits": {
+      "train": [
+        0,
+        21024
+      ],
+      "val": [
+        21024,
+        28032
+      ],
+      "test": [
+        28032,
+        35040
+      ]
+    },
+    "target_mask": "finite nonnegative targets != 0",
+    "mape": "100 * mean(abs(error) / target) on nonzero targets; no epsilon",
+    "aggregation": "pooled valid forecast-origin/lead/sensor/channel observations",
+    "input_zero_policy": "preserve",
+    "prediction_units": "original source flow units",
+    "parameters": 0,
+    "training": false,
+    "device": "cpu",
+    "seed": null,
+    "seed_reason": "No stochastic operations or fitted parameters.",
+    "calendar_assumption": "2019-01-01 00:00, 15 min, no timezone; unused by persistence",
+    "sensor_alignment": "assumed metadata row order"
+  },
+  "software": {
+    "python": "3.14.8",
+    "numpy": "2.5.4",
+    "torch": "2.14.1+cu130"
+  },
+  "hardware": {
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "processor": ""
+  },
+  "git": {
+    "revision": "925aebcd47cc1ac920e3984c808a228a9eb42bf1",
+    "status": "?? scripts/evaluate_persistence.py\n?? src/traffic_benchmark/baselines/\n?? src/traffic_benchmark/evaluation/\n?? tests/test_evaluation.py"
+  },
+  "source_hashes": {
+    "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+    "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+  },
+  "implementation_hashes": {
+    "scripts/evaluate_persistence.py": "c5ddf6fbc55892597f9ca4629714a7fa8a26f1bde9d3b391ddc81cd3fffd8416",
+    "src/traffic_benchmark/baselines/persistence.py": "adf39c530cf78956abe0bd2d3c87f6864d6774f8d129cc47b51e18bccfb80d12",
+    "src/traffic_benchmark/evaluation/metrics.py": "fa392824bebe9b5337a0ce37cb4084cc9e32815b7582c1e3dd843415ca22e9a6",
+    "src/traffic_benchmark/data/pipeline.py": "ef79941566b88c253f16377266f7664b395f8dd0919c099f3ed34d7111443db0"
+  },
+  "results": {
+    "val": {
+      "windows": 6997,
+      "overall_pooled": {
+        "mae": 64.13363217112267,
+        "rmse": 99.38459342813185,
+        "mape_percent": 41.54356652541681,
+        "valid_targets": 58367674,
+        "total_targets": 60118224,
+        "valid_fraction": 0.9708815416769464
+      },
+      "per_horizon": [
+        {
+          "step": 1,
+          "mae": 18.43470460901507,
+          "rmse": 28.133743192970112,
+          "mape_percent": 10.412815542000466,
+          "valid_targets": 4864011,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708891599991377
+        },
+        {
+          "step": 2,
+          "mae": 26.958996932978234,
+          "rmse": 40.99500922322951,
+          "mape_percent": 15.358302994867033,
+          "valid_targets": 4864002,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708873635388829
+        },
+        {
+          "step": 3,
+          "mae": 35.3555884320581,
+          "rmse": 53.03388937458607,
+          "mape_percent": 20.550064934785826,
+          "valid_targets": 4863994,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708857666853232
+        },
+        {
+          "step": 4,
+          "mae": 43.670596502539276,
+          "rmse": 64.80256274567117,
+          "mape_percent": 25.92089914428692,
+          "valid_targets": 4863986,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708841698317635
+        },
+        {
+          "step": 5,
+          "mae": 52.594582336806965,
+          "rmse": 77.4420845712968,
+          "mape_percent": 31.67243868483898,
+          "valid_targets": 4863979,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708827725848987
+        },
+        {
+          "step": 6,
+          "mae": 61.05796105364894,
+          "rmse": 89.14045994274488,
+          "mape_percent": 37.46952309654407,
+          "valid_targets": 4863973,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708815749447289
+        },
+        {
+          "step": 7,
+          "mae": 69.18973031683808,
+          "rmse": 100.0318626061565,
+          "mape_percent": 43.43253385928601,
+          "valid_targets": 4863967,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708803773045591
+        },
+        {
+          "step": 8,
+          "mae": 77.0305619226799,
+          "rmse": 110.32772354237582,
+          "mape_percent": 49.52179722613294,
+          "valid_targets": 4863961,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708791796643893
+        },
+        {
+          "step": 9,
+          "mae": 85.0938914550437,
+          "rmse": 120.68819892985844,
+          "mape_percent": 55.93821467225573,
+          "valid_targets": 4863957,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708783812376094
+        },
+        {
+          "step": 10,
+          "mae": 92.76568158333734,
+          "rmse": 130.37652202848014,
+          "mape_percent": 62.53920677169437,
+          "valid_targets": 4863954,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708777824175245
+        },
+        {
+          "step": 11,
+          "mae": 100.14057140413507,
+          "rmse": 139.4456005632029,
+          "mape_percent": 69.35351891891204,
+          "valid_targets": 4863948,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708765847773547
+        },
+        {
+          "step": 12,
+          "mae": 107.3121704576247,
+          "rmse": 148.03113791038268,
+          "mape_percent": 76.35454254326906,
+          "valid_targets": 4863942,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9708753871371849
+        }
+      ],
+      "evaluation_wall_seconds": 0.7709117679987685
+    },
+    "test": {
+      "windows": 6997,
+      "overall_pooled": {
+        "mae": 60.78248203406435,
+        "rmse": 94.3350138530444,
+        "mape_percent": 41.780132266285555,
+        "valid_targets": 58158396,
+        "total_targets": 60118224,
+        "valid_fraction": 0.9674004341844828
+      },
+      "per_horizon": [
+        {
+          "step": 1,
+          "mae": 17.722976164119967,
+          "rmse": 27.314146135559938,
+          "mape_percent": 10.709192795225652,
+          "valid_targets": 4846601,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674140074397407
+        },
+        {
+          "step": 2,
+          "mae": 25.731524170916906,
+          "rmse": 39.5864525053922,
+          "mape_percent": 15.599012045338338,
+          "valid_targets": 4846589,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674116121594011
+        },
+        {
+          "step": 3,
+          "mae": 33.605742074404695,
+          "rmse": 50.95605481225537,
+          "mape_percent": 20.728160993256058,
+          "valid_targets": 4846576,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674090172723665
+        },
+        {
+          "step": 4,
+          "mae": 41.379194002183816,
+          "rmse": 62.01152877922787,
+          "mape_percent": 26.069436567848097,
+          "valid_targets": 4846564,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674066219920269
+        },
+        {
+          "step": 5,
+          "mae": 49.79629782086271,
+          "rmse": 73.87755808676613,
+          "mape_percent": 31.8262532650135,
+          "valid_targets": 4846551,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674040271049923
+        },
+        {
+          "step": 6,
+          "mae": 57.78005145115957,
+          "rmse": 84.87019466827857,
+          "mape_percent": 37.646218450018715,
+          "valid_targets": 4846538,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674014322179577
+        },
+        {
+          "step": 7,
+          "mae": 65.45921181481333,
+          "rmse": 95.05038081907827,
+          "mape_percent": 43.62098568600328,
+          "valid_targets": 4846526,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673990369376181
+        },
+        {
+          "step": 8,
+          "mae": 72.87019863559635,
+          "rmse": 104.67202396851985,
+          "mape_percent": 49.74545495799864,
+          "valid_targets": 4846513,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673964420505835
+        },
+        {
+          "step": 9,
+          "mae": 80.52892117426572,
+          "rmse": 114.37461226407605,
+          "mape_percent": 56.22241492658925,
+          "valid_targets": 4846501,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673940467702439
+        },
+        {
+          "step": 10,
+          "mae": 87.85847097590215,
+          "rmse": 123.47717003345514,
+          "mape_percent": 62.85033749882465,
+          "valid_targets": 4846490,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673918510965993
+        },
+        {
+          "step": 11,
+          "mae": 94.90398058136239,
+          "rmse": 132.01179112283015,
+          "mape_percent": 69.67575078943837,
+          "valid_targets": 4846478,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673894558162597
+        },
+        {
+          "step": 12,
+          "mae": 101.75598936050143,
+          "rmse": 140.09905253946374,
+          "mape_percent": 76.67053131826178,
+          "valid_targets": 4846469,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673876593560049
+        }
+      ],
+      "evaluation_wall_seconds": 0.80523020200053
+    }
+  },
+  "timing_scope": "CPU batch indexing, forecasting, metric accumulation; excludes loading/setup; not an inference benchmark"
+}

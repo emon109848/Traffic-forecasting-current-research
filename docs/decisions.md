@@ -90,3 +90,15 @@ split boundaries and lazy 12-to-12 windows. Reconstruct a timezone-naive regular
 calendar from assumed 2019-01-01, Monday=0, explicitly adapting reference calendar
 indexing. Return original-unit targets with separate zero-exclusion mask.
 Use unittest with installed NumPy/PyTorch; no test dependency installation needed.
+
+## 2026-11-08 — Masked evaluation and persistence
+
+Status: implemented and evaluated within the approved milestone.
+
+Use float64 error sums/counts, nonzero-target masking and original-unit metrics.
+MAPE is percent without epsilon/additional threshold. Empty masks yield null;
+nonfinite predictions fail even at masked positions. Persistence repeats raw
+latest values, including zero, with no fitting. Evaluate validation/test without
+tuning, and store implementation/source hashes and dirty Git status alongside
+results. Full reports and curated tables are under reports/. No inference-speed
+claim is derived from evaluation wall time.
