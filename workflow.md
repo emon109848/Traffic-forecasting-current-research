@@ -374,3 +374,100 @@ forward/backward check and exact eval checkpoint reload. This probes gradients,
 not trained forecast quality. No optimizer update or GPU benchmark occurred.
 See [implementation guide](docs/patchstg_implementation.md). The next proposal is
 a host GPU feasibility check; BigST variant choice remains open.
+
+## 17. Prepare the host GPU feasibility check (November 11)
+
+Added a batch 1/2/4 CUDA check with disposable model/AdamW state per process. It
+measures allocator peaks and probes finite gradients/updates without a forecasting
+objective, checkpoints or full training experiment. OOM or other failure stops
+the sweep; unavailable CUDA produces an unattempted report.
+
+**Why:** CPU execution and a generic CUDA operation do not establish model memory
+fit. Separate workers avoid reusing allocator/optimizer state between batch sizes;
+including AdamW's first update captures states missing from forward-only checks.
+
+42 tests passed and real-data input staging worked on CPU. Agent CUDA remains
+unavailable, so no GPU measurements exist yet. Run the command in
+[the host instructions](docs/patchstg_gpu_feasibility.md) to finish the approved
+milestone; the training harness is still unapproved.
+
+## 18. Verify PatchSTG GPU feasibility on the host (November 11)
+
+You ran the GPU command successfully for batches 1, 2 and 4. We reviewed the
+saved report and verified its implementation hashes. Batch 4 peaked at 455 MiB
+allocated and 514 MiB reserved by PyTorch. No model dimensions were reduced.
+
+**Why:** this confirms the full model executes with gradients and optimizer state
+on your GPU. It does not establish forecast quality, epoch runtime or a maximum
+batch size. The one-off setup timings are not inference benchmarks.
+
+The approved feasibility milestone is complete. Next propose a reproducible
+training harness using tested batch 4 initially; no full training is started yet.
+See [measured report](reports/patchstg_gpu_feasibility.md).
+
+## 19. Build the bounded training harness (November 12)
+
+Added differentiable masked MAE in original units, seeded training order, pooled
+validation and best/last checkpoint saving. Empty training masks skip weight
+updates entirely; invalid predictions fail. Epoch-boundary checkpoints preserve
+optimizer/scheduler and RNG/shuffle state. Tests verify resume matches an
+uninterrupted CPU run with dropout, and validation selects best rather than last.
+
+**Why:** GPU feasibility proves execution, not a trustworthy training experiment.
+A capped diagnostic prevents accidentally starting a long run before measuring
+speed, and makes partial validation scores visibly different from final results.
+Source/software/config provenance is recorded before epoch execution.
+
+All 53 tests pass. A real-data CPU diagnostic completed two updates and validated
+eight windows; saved best weights reproduced the same subset score. No test
+evaluation occurred. Next run the approved 20-train/20-val-batch diagnostic on
+your host GPU, then review timing before final training settings.
+See [training instructions](docs/patchstg_training.md).
+
+## 20. Measure the capped supervised GPU run (November 12)
+
+You completed 20 updates and 20 validation batches. We checked the saved report
+and code hashes. GPU peak allocated/reserved was 472.60/540 MiB. The first step
+took 10.616 s, while the mean after excluding the first five was .06721 s.
+
+**Why:** startup timing alone greatly overstates steady update cost. The small
+sample suggests a full epoch may take roughly 6–10 minutes, but this is not a
+measured epoch duration. A single full-epoch calibration is the next proposal.
+Subset validation MAE is not a final score and no test data was evaluated.
+See [diagnostic report](reports/patchstg_training_smoke_host.md).
+
+## 21. Prepare full-epoch runtime calibration (November 12)
+
+You approved one full training/validation epoch. Added a separate config with
+no batch caps and epochs=1, keeping the same batch size, seed and optimizer.
+It starts fresh rather than extending the capped smoke run.
+
+**Why:** the earlier step mean covered only 15 updates after warm-up. A full
+epoch measures real traversal and validation costs before a multi-hour budget
+is chosen. The host command is in [training instructions](docs/patchstg_training.md).
+The run has not been launched here and no new result is claimed.
+
+## 22. Complete one full training epoch (November 12)
+
+You completed 5,251 updates and all 6,997 validation windows. We verified the
+report's source-code hashes and matching validation-mask counts. Training took
+350.97 seconds and validation 15.11 seconds, about 6.10 minutes combined.
+Full validation MAE was 25.2203 after one epoch; no test evaluation occurred.
+
+**Why:** this replaces short-run runtime extrapolation with an actual full-epoch
+measurement. It supports budget planning, not a convergence claim. The full
+calibration last.pt can be continued after approving a total epoch budget, so
+the completed epoch need not be discarded. See
+[calibration results](reports/patchstg_calibration_v1.md).
+
+## 23. Prepare the approved 50-epoch continuation (November 12)
+
+You approved 50 total PatchSTG epochs. We created a configuration changing only
+the epoch budget and verified compatibility with the epoch-one last.pt, including
+unchanged model/code and non-epoch settings.
+
+**Why:** resuming retains the completed epoch, optimizer/scheduler state and
+validation-best model. It adds 49 epochs rather than discarding work or restarting
+the short diagnostic. Approximate remaining time is five hours, based on actual
+calibration, not a promised finish time. Host launch is pending; test evaluation
+and additional seeds are not part of this run.

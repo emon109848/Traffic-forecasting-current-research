@@ -105,10 +105,12 @@ PYTHONPATH=src python scripts/check_patchstg.py --output-dir runs/patchstg_cpu_c
 Use new output directories; failures may leave partial artifacts for inspection.
 No packages were installed for this milestone.
 
-## Next proposal — separate approval
+## Next step — GPU tooling approved; host run pending
 
-Add a host GPU feasibility command for full-width batches 1, 2 and 4, including
+The approved [GPU feasibility command](patchstg_gpu_feasibility.md) is implemented
+for full-width batches 1, 2 and 4, including
 forward/backward and one optimizer-step memory check. Record allocated/reserved
-peaks and hardware, then scope a training harness from measured resource usage.
+peaks and hardware, then scope a training harness from measured resource usage. Host execution is
+pending because agent-session CUDA is unavailable.
 Do not begin full training before that step. BigST variant confirmation is still
 pending; this PatchSTG implementation does not select the BigST method variant.

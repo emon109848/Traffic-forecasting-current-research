@@ -1,6 +1,6 @@
 # Deadline scope and roadmap
 
-Updated 2026-11-11. Deadline: November 24, 2026. This replaces the initial
+Updated 2026-11-12. Deadline: November 24, 2026. This replaces the initial
 four-model implementation roadmap; the work already completed remains useful.
 
 ## Deliverable
@@ -81,3 +81,32 @@ real-data CPU forward/backward/reload check pass. See patchstg_implementation.md
 GPU model fit and training throughput remain unknown. Next propose the separately
 approved host GPU feasibility milestone, then a bounded trainer. BigST variant
 confirmation is still pending. Baseline result tables remain unchanged.
+
+## GPU feasibility tooling update
+
+GPU feasibility milestone approved; command/tests implemented. All 42 tests pass.
+Host model run is pending because the agent cannot access CUDA. No memory/runtime
+budget has been established. See patchstg_gpu_feasibility.md for the user command.
+Training remains a separately approved milestone; BigST variant choice is pending.
+
+## Host GPU results reviewed
+
+Full-width batch 1/2/4 probes passed; batch 4 peak allocated/reserved was
+455/514 MiB. See reports/patchstg_gpu_feasibility.md from the repository root.
+Use batch 4 as initial harness candidate; measure steady-state throughput
+before allocating epochs/seeds. Training-harness milestone awaits approval.
+
+## November 12 training harness update
+
+Trainer implemented with tests and a two-update full-model CPU integration check.
+53 tests pass. Host diagnostic capped at 20 training and 20 validation batches
+is the next approved action; docs/patchstg_training.md has the command (from the
+repository root). Final training epochs/seeds require measured throughput and
+a reviewed budget. No final PatchSTG accuracy experiment yet; BigST scope pending.
+
+## Approved 50-total-epoch continuation
+
+Seed-2023 PatchSTG continuation approved on November 12. Resume calibration
+last.pt and train epochs 2–50 with identical non-epoch settings. Host launch
+pending; no job started in the agent session. Approximate remaining cost five
+hours. Test evaluation and BigST scope remain separate decisions.

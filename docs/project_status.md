@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 2026-11-11
+Updated: 2026-11-12
 
 ## Current deadline scope
 
@@ -127,17 +127,69 @@ of 64 positions, output (1,12,716,1). See docs/patchstg_implementation.md and
 reports/patchstg_cpu_check.json. Source arrays unchanged; no packages installed.
 No training, optimizer step, GPU model feasibility or forecast accuracy measured.
 
-## Proposed next milestone — awaiting approval
+## GPU feasibility milestone — complete
 
-Host GPU feasibility check: full SD model at batch 1, then 2/4 if memory allows,
-including backward and one optimizer step, allocated/reserved memory and config/
-hardware provenance. Follow with a separately scoped training harness. BigST
-variant still awaits confirmation; no BigST implementation authorized.
+User-terminal run passed full SD batches 1/2/4 on RTX 5060 Laptop GPU, including
+one disposable AdamW step per batch. Peaks allocated/reserved: 168.93/198 MiB,
+268.40/282 MiB, 455.00/514 MiB respectively. Finite outputs, gradients and updated
+parameters passed. Current implementation hashes match the host report.
+Curated report/table: reports/patchstg_gpu_feasibility.json and .md.
+Agent CUDA remains unavailable; measurements came from the user’s actual host.
+All 42 tests passed at the last code check. No full training experiment or
+forecast accuracy for PatchSTG exists. One-off timings are not throughput data.
+
+## Training-harness milestone — implemented and CPU verified
+
+User approved the trainer milestone. Added training package, train_patchstg.py
+CLI, capped configs/patchstg_smoke.json and 11 tests. All 53 tests pass. Supports
+original-unit masked MAE, empty-batch skip, seeded shuffle, pooled validation,
+best/last checkpoints, epoch-boundary resume and source/software/RNG provenance.
+No test evaluation in the trainer. See docs/patchstg_training.md.
+
+Real-data full-width CPU diagnostic: two updates, two validation batches,
+best-checkpoint reload reproduces diagnostic MAE. Curated subset record in
+reports/patchstg_trainer_cpu_diagnostic.json; not comparable to full baselines.
+Source arrays unchanged; no new packages. Agent CUDA attempt exited unavailable
+without training. Final experiment environment lock remains pending.
+
+## Host training diagnostic — complete
+
+User ran the capped CUDA configuration: 20 updates, no skipped batches, 80
+validation windows, no test evaluation. Report/code hashes verified. Training
+wall 12.003 s includes a 10.616 s first-step startup; mean after first 5 updates
+0.06721 s. Peak allocated/reserved 472.60/540 MiB. Best/last checkpoints produced.
+See reports/patchstg_training_smoke_host.json and .md. Subset validation MAE
+147.4188 is diagnostic, not comparable to full-split baselines.
+
+## Full-epoch calibration — complete
+
+User completed fresh full-split calibration with batch 4, seed 2023: 5,251
+updates, no skips, all 6,997 validation windows. Training 350.97 s, validation
+15.11 s (6.10 min combined; excludes setup/checkpoint writes). Full validation
+MAE 25.2203, RMSE 36.1422, MAPE 24.5854%. No test evaluation.
+Peak allocated/reserved 472.60/584 MiB. Code hashes and baseline validation
+valid-target counts checked. Best/last checkpoints saved. See
+reports/patchstg_calibration_v1.json and .md.
+
+## PatchSTG 50-total-epoch continuation — approved, host launch pending
+
+User approved 50 total epochs for seed 2023. Created
+configs/patchstg_sd_50epochs.json; only epochs changed from calibration config.
+Verified the local last.pt loads with weights_only=True, epoch=1, and matches
+non-epoch training settings, model dimensions and implementation hashes.
+Continue from calibration last.pt into new runs/patchstg_sd_seed2023_50ep, epochs
+2–50. No restart, smoke resume, extra seed or test evaluation.
+
+Host command is in docs/patchstg_training.md. Expected roughly five more hours
+from measured epoch cost, with actual runtime subject to variation. Agent has
+not launched training; host launch/result confirmation pending. Best checkpoint
+selection remains validation-only. BigST variant and environment recreation
+specification remain open; observed software/package inventory is recorded.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. 35 pipeline/baseline/evaluation/model tests pass. Real-data loading and deterministic baseline
+library. 53 pipeline/baseline/evaluation/model/feasibility/training tests pass. Real-data loading and deterministic baseline
 evaluation completed; measured accuracy results are recorded without neural claims.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.

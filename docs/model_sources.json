@@ -9,14 +9,15 @@
       "config/SD.conf",
       "models/model.py",
       "lib/utils.py",
-      "LICENSE"
+      "LICENSE",
+      "main.py"
     ],
     "other_branch_files_read": [
       "main.py",
       "LICENSE"
     ],
     "software_license_observed": "MIT, copyright 2024 LMissher",
-    "remaining": "main.py pin verification pending before adopting its training schedule; no trainer copied.",
+    "remaining": "Full upstream checkpoint parity unverified. Training settings referenced at pinned main.py; independently written trainer.",
     "implementation_files": [
       "src/traffic_benchmark/data/spatial.py",
       "src/traffic_benchmark/models/patchstg.py"

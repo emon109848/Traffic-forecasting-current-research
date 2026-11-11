@@ -1,0 +1,517 @@
+{
+  "purpose": "Host GPU capped training diagnostic; not final accuracy experiment",
+  "report": {
+    "status": "completed",
+    "diagnostic_subset": true,
+    "test_evaluated": false,
+    "config": {
+      "epochs": 1,
+      "batch_size": 4,
+      "seed": 2023,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "grad_clip": 5.0,
+      "milestones": [
+        1,
+        35,
+        40
+      ],
+      "gamma": 0.5,
+      "max_train_batches": 20,
+      "max_val_batches": 20,
+      "warmup_batches": 5
+    },
+    "identity": {
+      "model_config": {
+        "nodes": 716,
+        "history": 12,
+        "signal_dim": 64,
+        "node_dim": 64,
+        "slot_dim": 32,
+        "weekday_dim": 32,
+        "slots_per_day": 96,
+        "layers": 5,
+        "dropout": 0.1
+      },
+      "spatial": {
+        "schema": 1,
+        "numpy_version": "2.5.4",
+        "source_sha256": {
+          "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+          "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+        },
+        "train_end": 21024,
+        "scaler": {
+          "mean": 247.19353447084683,
+          "std": 184.27468320611501
+        },
+        "segment_length": 288,
+        "depth": 9,
+        "leaf_size": 2,
+        "merge_factor": 32,
+        "tie_policy": "coordinate_then_sensor_index; padding_max_similarity_then_sensor_index",
+        "spatial_implementation_sha256": "3b8a5905dc6779d99708c1c636bc52f4d0c844190171590e48313da8129a36c1"
+      },
+      "splits": {
+        "train": [
+          0,
+          21024
+        ],
+        "val": [
+          21024,
+          28032
+        ],
+        "test": [
+          28032,
+          35040
+        ]
+      },
+      "source_sha256": {
+        "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+        "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+      },
+      "scaler": {
+        "mean": 247.19353447084683,
+        "std": 184.27468320611501
+      },
+      "software": {
+        "python": "3.14.8",
+        "torch": "2.14.1+cu130",
+        "numpy": "2.5.4",
+        "cuda_build": "13.0",
+        "cudnn": 92400
+      },
+      "device": "cuda:0",
+      "implementation_sha256": {
+        "scripts/train_patchstg.py": "4c3c10272329f87ca9d9f0de516c014fd6bad4b5e9c4cbb4892ff3ff2e6dd5bc",
+        "src/traffic_benchmark/training/trainer.py": "0c3aeeef357b417644f99bf3dad7e3652eaf0725725337e230c5b09d94e18f65",
+        "src/traffic_benchmark/models/patchstg.py": "2328f3b82179eeef14e82f932ffbc69bbe6bb90614129f6b9708803cca325a0f",
+        "src/traffic_benchmark/data/spatial.py": "3b8a5905dc6779d99708c1c636bc52f4d0c844190171590e48313da8129a36c1",
+        "src/traffic_benchmark/data/pipeline.py": "ef79941566b88c253f16377266f7664b395f8dd0919c099f3ed34d7111443db0",
+        "src/traffic_benchmark/evaluation/metrics.py": "fa392824bebe9b5337a0ce37cb4084cc9e32815b7582c1e3dd843415ca22e9a6"
+      },
+      "calendar": "assumed 2019-01-01 00:00; 15 min; Monday=0; no timezone",
+      "mask": "nonzero targets only; no input imputation",
+      "precision": "FP32; deterministic algorithms; no AMP/compile/TF32",
+      "cublas_workspace_config": ":4096:8"
+    },
+    "device": "cuda:0",
+    "resume_from": null,
+    "history": [
+      {
+        "epoch": 1,
+        "learning_rate": 0.002,
+        "training": {
+          "mae": 267.23395193040403,
+          "valid_targets": 676122,
+          "optimizer_steps": 20,
+          "skipped_empty_batches": 0,
+          "wall_seconds": 12.003172796001309,
+          "step_seconds": [
+            10.616398685000604,
+            0.13093529699835926,
+            0.10240021499339491,
+            0.06621455699496437,
+            0.06335396600479726,
+            0.08866449700144585,
+            0.1138085810089251,
+            0.07054385400260799,
+            0.060005534993251786,
+            0.0626547540014144,
+            0.059240911999950185,
+            0.06103014000109397,
+            0.0623216040112311,
+            0.06136927199258935,
+            0.05857418300001882,
+            0.06347190600354224,
+            0.06327221500396263,
+            0.061271201993804425,
+            0.06174632499460131,
+            0.06019379799545277
+          ],
+          "warmup_steps_excluded": 5,
+          "post_warmup_mean_step_seconds": 0.06721125186692613
+        },
+        "validation": {
+          "overall_pooled": {
+            "mae": 147.41883462334016,
+            "rmse": 190.75796672773916,
+            "mape_percent": 166.87233309742103,
+            "valid_targets": 674218,
+            "total_targets": 687360,
+            "valid_fraction": 0.9808804702048417
+          },
+          "per_horizon": [
+            {
+              "step": 1,
+              "mae": 137.11521396248483,
+              "rmse": 156.4647643281674,
+              "mape_percent": 191.48720590155514,
+              "valid_targets": 56168,
+              "total_targets": 57280,
+              "valid_fraction": 0.980586592178771
+            },
+            {
+              "step": 2,
+              "mae": 110.49801450131484,
+              "rmse": 138.3960471243896,
+              "mape_percent": 228.14444768386292,
+              "valid_targets": 56169,
+              "total_targets": 57280,
+              "valid_fraction": 0.9806040502793296
+            },
+            {
+              "step": 3,
+              "mae": 87.93418062227094,
+              "rmse": 113.05048629766951,
+              "mape_percent": 103.56927936599428,
+              "valid_targets": 56171,
+              "total_targets": 57280,
+              "valid_fraction": 0.9806389664804469
+            },
+            {
+              "step": 4,
+              "mae": 140.98310020834813,
+              "rmse": 183.9050809926843,
+              "mape_percent": 68.82594852363961,
+              "valid_targets": 56173,
+              "total_targets": 57280,
+              "valid_fraction": 0.9806738826815642
+            },
+            {
+              "step": 5,
+              "mae": 181.14584420895991,
+              "rmse": 217.5032088207749,
+              "mape_percent": 225.46428718686118,
+              "valid_targets": 56176,
+              "total_targets": 57280,
+              "valid_fraction": 0.9807262569832402
+            },
+            {
+              "step": 6,
+              "mae": 94.49758566655736,
+              "rmse": 122.92944247387231,
+              "mape_percent": 118.84979416374911,
+              "valid_targets": 56180,
+              "total_targets": 57280,
+              "valid_fraction": 0.9807960893854749
+            },
+            {
+              "step": 7,
+              "mae": 129.51877862076702,
+              "rmse": 160.93354265660355,
+              "mape_percent": 150.57453316464057,
+              "valid_targets": 56184,
+              "total_targets": 57280,
+              "valid_fraction": 0.9808659217877095
+            },
+            {
+              "step": 8,
+              "mae": 165.61887206088915,
+              "rmse": 203.7632541113673,
+              "mape_percent": 156.0318016789303,
+              "valid_targets": 56188,
+              "total_targets": 57280,
+              "valid_fraction": 0.9809357541899442
+            },
+            {
+              "step": 9,
+              "mae": 184.3314793098608,
+              "rmse": 219.04323019379373,
+              "mape_percent": 270.7744724903421,
+              "valid_targets": 56194,
+              "total_targets": 57280,
+              "valid_fraction": 0.9810405027932961
+            },
+            {
+              "step": 10,
+              "mae": 157.88815757594128,
+              "rmse": 202.06868818988684,
+              "mape_percent": 67.90644355295099,
+              "valid_targets": 56201,
+              "total_targets": 57280,
+              "valid_fraction": 0.9811627094972067
+            },
+            {
+              "step": 11,
+              "mae": 215.87232227310167,
+              "rmse": 286.0130128742997,
+              "mape_percent": 347.97733187908705,
+              "valid_targets": 56205,
+              "total_targets": 57280,
+              "valid_fraction": 0.9812325418994413
+            },
+            {
+              "step": 12,
+              "mae": 163.55188788153546,
+              "rmse": 214.32366273348103,
+              "mape_percent": 72.84327169787224,
+              "valid_targets": 56209,
+              "total_targets": 57280,
+              "valid_fraction": 0.981302374301676
+            }
+          ],
+          "windows": 80,
+          "wall_seconds": 0.1504862959991442
+        },
+        "new_best": true
+      }
+    ],
+    "best_validation_mae": 147.41883462334016,
+    "best_epoch": 1,
+    "completed_epochs": 1,
+    "peak_allocated_bytes": 495558144,
+    "peak_reserved_bytes": 566231040
+  },
+  "provenance": {
+    "created_utc": "2026-11-11T21:54:44.488939+00:00",
+    "config_source_sha256": "c7d878bdf785a793ae4e2fef3e725d29f6b21a882a57a8758fe21cb5a53d62c0",
+    "resolved_model": {
+      "nodes": 716,
+      "history": 12,
+      "signal_dim": 64,
+      "node_dim": 64,
+      "slot_dim": 32,
+      "weekday_dim": 32,
+      "slots_per_day": 96,
+      "layers": 5,
+      "dropout": 0.1
+    },
+    "resolved_training": {
+      "epochs": 1,
+      "batch_size": 4,
+      "seed": 2023,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "grad_clip": 5.0,
+      "milestones": [
+        1,
+        35,
+        40
+      ],
+      "gamma": 0.5,
+      "max_train_batches": 20,
+      "max_val_batches": 20,
+      "warmup_batches": 5
+    },
+    "overrides": {
+      "train_batches": null,
+      "val_batches": null
+    },
+    "git": {
+      "revision": "91c60c2794e1dd72e87d428bf004a69606727b60",
+      "status": "M README.md\n M docs/decisions.md\n M docs/model_sources.json\n M docs/patchstg_implementation.md\n M docs/project_status.md\n M docs/roadmap.md\n M workflow.md\n?? configs/\n?? docs/patchstg_gpu_feasibility.md\n?? docs/patchstg_training.md\n?? reports/patchstg_gpu_feasibility.json\n?? reports/patchstg_gpu_feasibility.md\n?? reports/patchstg_trainer_cpu_diagnostic.json\n?? scripts/check_patchstg_gpu.py\n?? scripts/train_patchstg.py\n?? src/traffic_benchmark/evaluation/feasibility.py\n?? src/traffic_benchmark/training/\n?? tests/test_gpu_feasibility.py\n?? tests/test_training.py"
+    },
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "software": {
+      "python": "3.14.8",
+      "torch": "2.14.1+cu130",
+      "numpy": "2.5.4",
+      "cuda_build": "13.0",
+      "cudnn": 92400
+    },
+    "seed": 2023,
+    "installed_python_packages": [
+      {
+        "name": "ale-py",
+        "version": "0.12.1"
+      },
+      {
+        "name": "cloudpickle",
+        "version": "3.1.2"
+      },
+      {
+        "name": "contourpy",
+        "version": "1.4.0"
+      },
+      {
+        "name": "cuda-bindings",
+        "version": "13.4.3"
+      },
+      {
+        "name": "cuda-pathfinder",
+        "version": "1.8.3"
+      },
+      {
+        "name": "cuda-toolkit",
+        "version": "13.0.3.0"
+      },
+      {
+        "name": "cycler",
+        "version": "0.12.1"
+      },
+      {
+        "name": "Farama-Notifications",
+        "version": "0.0.6"
+      },
+      {
+        "name": "filelock",
+        "version": "4.1.0"
+      },
+      {
+        "name": "fonttools",
+        "version": "4.66.1"
+      },
+      {
+        "name": "fsspec",
+        "version": "2026.9.0"
+      },
+      {
+        "name": "gymnasium",
+        "version": "1.4.0"
+      },
+      {
+        "name": "Jinja2",
+        "version": "3.1.6"
+      },
+      {
+        "name": "kiwisolver",
+        "version": "1.5.1"
+      },
+      {
+        "name": "MarkupSafe",
+        "version": "3.0.4"
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.11.2"
+      },
+      {
+        "name": "mpmath",
+        "version": "1.3.0"
+      },
+      {
+        "name": "networkx",
+        "version": "3.7"
+      },
+      {
+        "name": "numpy",
+        "version": "2.5.4"
+      },
+      {
+        "name": "nvidia-cublas",
+        "version": "13.1.1.3"
+      },
+      {
+        "name": "nvidia-cuda-cupti",
+        "version": "13.0.85"
+      },
+      {
+        "name": "nvidia-cuda-nvrtc",
+        "version": "13.0.88"
+      },
+      {
+        "name": "nvidia-cuda-runtime",
+        "version": "13.0.96"
+      },
+      {
+        "name": "nvidia-cudnn-cu13",
+        "version": "9.24.0.43"
+      },
+      {
+        "name": "nvidia-cufft",
+        "version": "12.0.0.61"
+      },
+      {
+        "name": "nvidia-cufile",
+        "version": "1.15.1.6"
+      },
+      {
+        "name": "nvidia-curand",
+        "version": "10.4.0.35"
+      },
+      {
+        "name": "nvidia-cusolver",
+        "version": "12.0.4.66"
+      },
+      {
+        "name": "nvidia-cusparse",
+        "version": "12.6.3.3"
+      },
+      {
+        "name": "nvidia-cusparselt-cu13",
+        "version": "0.8.1"
+      },
+      {
+        "name": "nvidia-nccl-cu13",
+        "version": "2.30.7"
+      },
+      {
+        "name": "nvidia-nvjitlink",
+        "version": "13.4.92"
+      },
+      {
+        "name": "nvidia-nvshmem-cu13",
+        "version": "3.4.5"
+      },
+      {
+        "name": "nvidia-nvtx",
+        "version": "13.0.85"
+      },
+      {
+        "name": "opencv-python-headless",
+        "version": "5.0.0.93"
+      },
+      {
+        "name": "packaging",
+        "version": "26.3"
+      },
+      {
+        "name": "pillow",
+        "version": "12.3.0"
+      },
+      {
+        "name": "pip",
+        "version": "26.2.1"
+      },
+      {
+        "name": "pyparsing",
+        "version": "3.3.3"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0"
+      },
+      {
+        "name": "setuptools",
+        "version": "84.0.0"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0"
+      },
+      {
+        "name": "sympy",
+        "version": "1.14.0"
+      },
+      {
+        "name": "torch",
+        "version": "2.14.1"
+      },
+      {
+        "name": "triton",
+        "version": "3.8.0"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      }
+    ],
+    "environment_inventory_note": "Observed installed versions, including unrelated packages; not a solver lock or install specification.",
+    "dataset_version": "author-processed SD 2019 assumption; identified by recorded file hashes",
+    "resume_checkpoint_sha256": null,
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "total_memory_bytes": 8518041600,
+      "compute_capability": [
+        12,
+        0
+      ]
+    }
+  },
+  "extrapolation": {
+    "full_training_batches_at_batch4": 5251,
+    "training_step_work_seconds": 352.9262835532291,
+    "excludes": "validation, checkpoint/preprocessing costs, dataloader overhead and sustained-load variation; not measured full epoch"
+  }
+}

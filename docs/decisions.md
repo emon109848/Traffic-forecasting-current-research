@@ -163,3 +163,81 @@ map/cache invariants and state-dict reload. Real-data CPU check passed with
 2,284,844 trainable parameters. No optimizer updates, training, GPU measurements
 or forecast accuracy claimed. BigST scope remains pending; GPU feasibility next
 requires a separately approved milestone.
+
+## 2026-11-11 — Approved host GPU feasibility tooling
+
+Status: implementation and CPU checks complete; host GPU run pending.
+
+Use separate CUDA worker processes for batches 1/2/4; stop at first failed/OOM
+batch. Record peak allocated/reserved memory including forward/backward and
+initial AdamW state allocation. Disposable model, artificial squared-output
+objective, no checkpoint/forecast metric or training run. Preserve source/config
+hashes, precision, optimizer flags and failure outcomes. No invented GPU results
+when agent visibility is blocked. No training-harness approval implied.
+
+## 2026-11-11 — Host GPU feasibility passed
+
+Status: complete; actual saved user-terminal report reviewed and hashes verified.
+
+Full-width PatchSTG passes batch 1/2/4 including backward and one AdamW update.
+Recommend tested batch 4 as a conservative trainer starting point. Larger sizes
+and steady-state throughput remain unmeasured; no epoch-runtime inference from
+one-off setup timings. Curate host JSON/table under reports/. No full training
+is authorized by this result; the next harness milestone needs approval.
+
+## 2026-11-12 — Bounded training harness and diagnostic configuration
+
+Status: implemented/CPU verified within approved milestone; host diagnostic pending.
+
+Use original-unit masked MAE; skip empty masks without AdamW updates, reject
+invalid values, clip gradient norm 5. AdamW .002/.0001, foreach=False, epoch-end
+schedule [1,35,40] gamma .5. Select by pooled validation MAE. No test evaluation.
+Default supplied config is diagnostic: 1 epoch, batch 4, 20 train and 20 val
+batches, seed 2023. No final experiment config or accuracy claim.
+
+Record seed/software/source/config/code/hardware identity and installed version
+inventory; the latter is not a full environment lock. Atomic best/last states
+include epoch-boundary optimizer/scheduler/RNG/shuffle resume. Config identity
+must match except extending total epochs. 53 tests pass and a two-batch full-model
+CPU integration/reload check passed. Host timing is next; do not infer runtime
+from earlier GPU setup probes. No dependencies installed.
+
+## 2026-11-12 — Host supervised diagnostic passed
+
+Status: capped host training validation complete.
+
+20 updates/20 validation batches passed with batch 4, no skips and no test use.
+Use post-warm-up timing (.06721 s/update) rather than first-step startup for
+rough planning. Full epoch estimates remain extrapolations. Recommend a single
+full-epoch calibration milestone before final budget selection; not yet approved.
+Store subset results separately and never compare them to full baseline scores.
+
+## 2026-11-12 — Approved one-full-epoch calibration
+
+Status: configuration prepared; host execution pending.
+
+Preserve model, optimizer/scheduler, batch 4 and seed 2023. Remove train/val
+batch caps while keeping epochs=1. Start fresh, without resuming the capped
+smoke model. Traverse full training/validation splits, save checkpoints and
+measure actual runtime; no test evaluation or automatic continuation. Full
+experiment budget remains a later reviewed decision. No source code changed.
+
+## 2026-11-12 — Full-epoch calibration completed
+
+Status: actual user-host report reviewed; code hashes verified.
+
+5,251 updates, full validation, no skips, no test use. Training/validation time
+350.97/15.11 s; actual combined epoch cost about 6.10 min excluding setup and
+checkpoints. Validation MAE 25.2203 after one epoch, not final model accuracy.
+Saved last.pt is eligible for a later approved epoch-budget extension; source
+identity and non-epoch settings must remain unchanged. No continuation started.
+
+## 2026-11-12 — Approved seed-2023 PatchSTG continuation to 50 total epochs
+
+Status: config/checkpoint compatibility verified; host launch pending.
+
+Resume the full calibration last.pt after epoch one, run epochs 2–50, batch 4
+and all other settings unchanged. Best checkpoint chosen by full validation MAE;
+no test evaluation or additional seed. Estimated remaining train/validation
+time approximately five hours, not guaranteed. No training source changes or
+packages installed. Agent did not launch a GPU job in its restricted session.

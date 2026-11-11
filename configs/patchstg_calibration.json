@@ -1,0 +1,20 @@
+{
+  "model": {},
+  "training": {
+    "epochs": 1,
+    "batch_size": 4,
+    "seed": 2023,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "grad_clip": 5.0,
+    "milestones": [
+      1,
+      35,
+      40
+    ],
+    "gamma": 0.5,
+    "max_train_batches": null,
+    "max_val_batches": null,
+    "warmup_batches": 5
+  }
+}
