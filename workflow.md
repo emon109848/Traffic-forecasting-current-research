@@ -309,13 +309,15 @@ commit or push those changes; check Git status for current pending work.
 
 ## 13. What remains before attention experiments
 
-The proposed next milestone is a focused BigST/PatchSTG architecture and
-feasibility review. This replaces the earlier STAEformer-first plan. Propose
+The BigST/PatchSTG architecture review was completed November 11. It replaced
+the earlier STAEformer-first plan. The next proposed milestone is PatchSTG
+spatial preparation and model tests. Propose
 PatchSTG implementation first, then BigST, after resolving its long-history
 variant. See [deadline roadmap](docs/roadmap.md). Implementation and training
 remain independently approved milestones.
-No attention model, differentiable training loss, neural training loop, or
-GPU performance benchmark exists yet.
+At that stage no attention model existed. PatchSTG components have since been
+implemented as recorded in section 16; differentiable forecasting loss, neural
+training loop and GPU performance benchmarks are still pending.
 
 Before expensive experiments, we still need an exact environment specification,
 model fidelity records, training/checkpoint/tuning rules, and reproducible run
@@ -341,3 +343,34 @@ reproduction checks and submission. It is not a training-runtime guarantee.
 Use author references carefully and label adaptations. Full BigST long-history
 costs and fair origin eligibility still need review. No complete research-model
 comparison or GPU memory feasibility is claimed yet.
+
+## 15. Review the two research architectures (November 11)
+
+Completed a documentation-only review of the papers and author source. Added
+shape traces and a proposed implementation checklist. Found a reference
+similarity-segmentation cadence discrepancy and explicit optional BigST paths.
+Source pinning and license observations are recorded without claiming a full
+reproduction. No model code or training has started.
+
+**Why:** implementing directly from model names could silently change the method
+or input budget. The bounded BigST variant is proposed, not approved; preserve
+its label if chosen. The next proposed work is PatchSTG spatial preparation and
+model tests. See [review plan](docs/model_implementation_plan.md).
+
+## 16. Implement PatchSTG spatial preparation and model (November 11)
+
+Built training-only similarity, balanced spatial partitions, padding/restoration
+maps and provenance-checked local caches. Preserved 288-step segments and made
+equal-coordinate/similarity ordering deterministic. Added the code-aligned SD
+architecture using explicit PyTorch attention, without installing timm.
+
+**Why:** index restoration and attention axes are easy to get wrong while still
+producing plausible shapes. Tests use known maps, isolated depth/breadth updates
+and fixed-weight PyTorch attention parity. Cache checks prevent silent reuse
+under a changed training split, metadata order or implementation.
+
+All 35 tests passed. The full 2,284,844-parameter model completed a real-SD CPU
+forward/backward check and exact eval checkpoint reload. This probes gradients,
+not trained forecast quality. No optimizer update or GPU benchmark occurred.
+See [implementation guide](docs/patchstg_implementation.md). The next proposal is
+a host GPU feasibility check; BigST variant choice remains open.

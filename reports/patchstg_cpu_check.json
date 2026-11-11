@@ -1,0 +1,79 @@
+{
+  "check": "PatchSTG SD real-data CPU forward/backward; untrained",
+  "implementation": "code-aligned adaptation; not official reproduction",
+  "reference_commit": "8b298b230227a304a082e05241c69dca3740a73d",
+  "config": {
+    "nodes": 716,
+    "history": 12,
+    "signal_dim": 64,
+    "node_dim": 64,
+    "slot_dim": 32,
+    "weekday_dim": 32,
+    "slots_per_day": 96,
+    "layers": 5,
+    "dropout": 0.1
+  },
+  "seed": 2023,
+  "device": "cpu",
+  "cpu_threads": 2,
+  "software": {
+    "python": "3.14.8",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4"
+  },
+  "git": {
+    "revision": "4ebb67d9af59a80490a6934a10ef82d4f9d34573",
+    "status": "M README.md\n M docs/decisions.md\n M docs/model_compatibility.md\n M docs/project_status.md\n M docs/roadmap.md\n M workflow.md\n?? THIRD_PARTY_NOTICES.md\n?? docs/model_implementation_plan.md\n?? docs/model_sources.json\n?? docs/papers/bigst.md\n?? docs/papers/patchstg.md\n?? scripts/check_patchstg.py\n?? src/traffic_benchmark/data/spatial.py\n?? src/traffic_benchmark/models/\n?? tests/test_patchstg.py"
+  },
+  "implementation_sha256": {
+    "scripts/check_patchstg.py": "4091dae6f17d953dd28b17db5b97ebbe26960a2b0adf2e23a6caf7eb39173768",
+    "src/traffic_benchmark/models/patchstg.py": "2328f3b82179eeef14e82f932ffbc69bbe6bb90614129f6b9708803cca325a0f",
+    "src/traffic_benchmark/data/spatial.py": "3b8a5905dc6779d99708c1c636bc52f4d0c844190171590e48313da8129a36c1",
+    "src/traffic_benchmark/data/pipeline.py": "ef79941566b88c253f16377266f7664b395f8dd0919c099f3ed34d7111443db0"
+  },
+  "spatial_provenance": {
+    "schema": 1,
+    "numpy_version": "2.5.4",
+    "source_sha256": {
+      "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+      "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+    },
+    "train_end": 21024,
+    "scaler": {
+      "mean": 247.19353447084683,
+      "std": 184.27468320611501
+    },
+    "segment_length": 288,
+    "depth": 9,
+    "leaf_size": 2,
+    "merge_factor": 32,
+    "tie_policy": "coordinate_then_sensor_index; padding_max_similarity_then_sensor_index",
+    "spatial_implementation_sha256": "3b8a5905dc6779d99708c1c636bc52f4d0c844190171590e48313da8129a36c1"
+  },
+  "cache_sha256": "055a1c4df06e0dbe66cd52bf3b3c6a7c5cb87df2cf703d719e16e61cf0688055",
+  "spatial": {
+    "original_sensors": 716,
+    "padded_positions": 1024,
+    "extra_positions": 308,
+    "patch_count": 16,
+    "patch_size": 64,
+    "training_segments": 73,
+    "gather_sha256": "88e2d60f46da3ccc54bd60b0575c8721b8c302a464b3f0a040af707d26a59254",
+    "restore_sha256": "d7480c7af51522088bb282332e6cffaf60c976b9e6bfbc38de1725b38e84d276"
+  },
+  "parameter_count": 2284844,
+  "trainable_parameter_count": 2284844,
+  "output_shape": [
+    1,
+    12,
+    716,
+    1
+  ],
+  "finite_prediction": true,
+  "finite_parameter_gradients": true,
+  "checkpoint_reload_exact": true,
+  "original_unit_conversion_finite": true,
+  "training_performed": false,
+  "gpu_checked": false,
+  "forecast_accuracy_measured": false
+}

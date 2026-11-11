@@ -13,8 +13,8 @@ efficiency comparison on SD; it does not establish large-network scalability.
 
 Foundation, compatibility review, environment validation, dataset inspection and
 the reusable data pipeline are complete. Local SD data is excluded from Git.
-Tested persistence and seasonal-average baselines with measured results are available. No attention
-models or neural training loop exist yet.
+Tested persistence and seasonal-average baselines with measured results are available. PatchSTG spatial/model components pass full-width CPU checks; no trained neural
+results or training loop exist yet.
 
 ## Scope and roadmap
 
@@ -24,9 +24,11 @@ searches, extra datasets, broad scalability trials and extensive ablations are
 deferred beyond the deadline.
 
 1. Completed: foundation, Conda/CUDA checks, SD audit, data pipeline and baselines.
-2. Next proposed: focused BigST/PatchSTG architecture and feasibility review;
-   resolve BigST's long-history variant, input fairness and adaptation requirements.
-3. Implement and test PatchSTG, then BigST, subject to feasibility and approval.
+2. Completed: focused architecture review; BigST variant confirmation is pending.
+   PatchSTG preprocessing/model tests and real-data CPU check are complete.
+   Next proposed: host GPU feasibility before a training harness.
+3. Verify PatchSTG GPU feasibility; scope training and BigST implementation
+   separately, subject to approval.
 4. Run consistent accuracy and SD efficiency experiments within a measured budget.
 5. Write the comparison, plots, limitations and reproduction instructions.
 
@@ -57,6 +59,11 @@ Installation and training instructions will be added when validated. Git is init
 
 Start with [the workflow learning guide](workflow.md) for what was built and why.
 
+- [PatchSTG implementation and CPU checks](docs/patchstg_implementation.md)
+- [Third-party attribution](THIRD_PARTY_NOTICES.md)
+- [Architecture review and implementation plan](docs/model_implementation_plan.md)
+- [PatchSTG architecture guide](docs/papers/patchstg.md)
+- [BigST architecture guide](docs/papers/bigst.md)
 - [Deadline scope and roadmap](docs/roadmap.md)
 - [Seasonal-average comparison](reports/seasonal_average_sd_v1.md)
 - [Persistence baseline results](reports/persistence_sd_v1.md)

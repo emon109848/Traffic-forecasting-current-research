@@ -135,3 +135,31 @@ Report SD accuracy/efficiency without larger-network scalability claims. Use
 measured runtimes to freeze the seed/experiment budget; three seeds desirable
 but not promised. Preserve Nov 22–24 for documentation and submission.
 No neural implementation or training authorized by this documentation update.
+
+## 2026-11-11 — Architecture review findings and pending proposals
+
+Status: review completed; implementation/variant proposals await approval.
+
+Recommend code-aligned PatchSTG SD dimensions and preserve 288-step similarity
+segments initially, explicitly documenting the cadence discrepancy. Recommend
+BigST short-history core without LSFE/spatial regularizer for the deadline,
+with a variant label; full BigST remains a user choice. No silent method reduction.
+Partial immutable-source checks and license observations recorded in
+model_sources.json. PatchSTG MIT observed; BigST code reuse terms unresolved.
+No vendored source, package installs, architecture code or hardware measurements.
+
+## 2026-11-11 — PatchSTG implementation and CPU verification
+
+Status: completed within explicitly approved milestone.
+
+Implement the code-aligned SD path (one temporal patch, H=F), explicit one-head
+attention/MLP and full reference SD widths. Preserve 288-frame similarity profiles;
+use training-only scaler verification and integrity/provenance-checked maps.
+Specify stable sensor-index tie handling. Keep registered index buffers and
+normalized outputs. MIT notice retained in THIRD_PARTY_NOTICES.md.
+
+35 tests pass, including numerical one-head attention checks, axis behavior,
+map/cache invariants and state-dict reload. Real-data CPU check passed with
+2,284,844 trainable parameters. No optimizer updates, training, GPU measurements
+or forecast accuracy claimed. BigST scope remains pending; GPU feasibility next
+requires a separately approved milestone.

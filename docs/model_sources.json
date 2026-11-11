@@ -1,0 +1,55 @@
+{
+  "review_date": "2026-11-11",
+  "status": "patchstg_code_aligned_adaptation_implemented_cpu_checked",
+  "patchstg": {
+    "paper": "https://arxiv.org/abs/2412.09972v2",
+    "reference_commit": "8b298b230227a304a082e05241c69dca3740a73d",
+    "commit_url": "https://github.com/LMissher/PatchSTG/commit/8b298b230227a304a082e05241c69dca3740a73d",
+    "immutable_files_read": [
+      "config/SD.conf",
+      "models/model.py",
+      "lib/utils.py",
+      "LICENSE"
+    ],
+    "other_branch_files_read": [
+      "main.py",
+      "LICENSE"
+    ],
+    "software_license_observed": "MIT, copyright 2024 LMissher",
+    "remaining": "main.py pin verification pending before adopting its training schedule; no trainer copied.",
+    "implementation_files": [
+      "src/traffic_benchmark/data/spatial.py",
+      "src/traffic_benchmark/models/patchstg.py"
+    ],
+    "license_notice": "THIRD_PARTY_NOTICES.md",
+    "validation": "35 tests and real-data full-width CPU forward/backward/reload; not upstream checkpoint parity"
+  },
+  "bigst": {
+    "paper": "https://www.vldb.org/pvldb/vol17/p1081-han.pdf",
+    "reference_commit": "830cb529354c0cda75c1660d1a0af2ffc7e66abb",
+    "commit_url": "https://github.com/usail-hkust/BigST/commit/830cb529354c0cda75c1660d1a0af2ffc7e66abb",
+    "immutable_files_read": [
+      "run.py"
+    ],
+    "branch_files_read": [
+      "model.py",
+      "trainer.py",
+      "preprocess/preprocess.py",
+      "README.md"
+    ],
+    "immutable_model_fetch": "unavailable via web reader; do not claim model.py pinned verification",
+    "preprocess_model_fetch": "unavailable; LSFE code not fully verified",
+    "software_license_observed": null,
+    "license_check": "Root listing had no license; /main/LICENSE returned 404. No reuse permission inferred."
+  },
+  "limitations": [
+    "Commit IDs come from accessible commit-history pages; no live Git ref resolution was available. Do not claim these are verified current upstream HEADs.",
+    "No repository cloned or new dependency installed. PatchSTG code-aligned adaptation implemented with MIT notice and CPU checks; no full upstream numerical reproduction.",
+    "Full upstream numerical equivalence, GPU peak VRAM and throughput remain unmeasured. PatchSTG parameters counted at 2,284,844."
+  ],
+  "implementation_update_date": "2026-11-11",
+  "attention_api_references": [
+    "https://github.com/huggingface/pytorch-image-models/blob/v1.0.12/timm/models/vision_transformer.py",
+    "https://github.com/huggingface/pytorch-image-models/blob/v1.0.12/timm/layers/mlp.py"
+  ]
+}

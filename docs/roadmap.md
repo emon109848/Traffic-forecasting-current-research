@@ -1,6 +1,6 @@
 # Deadline scope and roadmap
 
-Updated 2026-11-08. Deadline: November 24, 2026. This replaces the initial
+Updated 2026-11-11. Deadline: November 24, 2026. This replaces the initial
 four-model implementation roadmap; the work already completed remains useful.
 
 ## Deliverable
@@ -31,7 +31,7 @@ one approved milestone at a time.
 | Nov 22–23 | Analysis, plots, documentation and reproduction check |
 | Nov 24 | Submission buffer |
 
-## Next proposed milestone: architecture and feasibility review
+## Architecture review completed November 11; implementation pending
 
 Explain each paper's components, input/output shapes, source-code discrepancies
 and required preprocessing. Review author-code licensing and freeze references
@@ -46,7 +46,11 @@ index restoration and differences between paper dimensions and author configs.
 Identify how to measure a forward/backward smoke test on the 8 GiB GPU. Numerical
 GPU model feasibility and training throughput are still unknown.
 
-The review is the next proposal, not approval for implementation or training.
+The review is complete; guides and proposals are in model_implementation_plan.md.
+The original Nov 8–10 review target slipped to Nov 11. Next propose PatchSTG
+preprocessing/model tests, without implying the remaining dates are guaranteed.
+BigST variant confirmation remains pending. No implementation/training approval
+is implied by completing this review.
 Adaptation of author code is acceptable in principle for the deadline, but code
 reuse still requires source/license checks, attribution, tests and clear fidelity
 labels. Learning deliverables include equation-to-code mappings and explanations.
@@ -69,3 +73,11 @@ Protect Nov 22–24 for reporting. If either implementation is infeasible, expla
 the concrete blocker and agree a revised scope; do not fabricate a complete
 comparison or add substitute models without approval. Accuracy and correctness
 come before optional tuning, ablations and additional plots.
+
+## November 11 progress update
+
+PatchSTG spatial preparation and full-width model implemented; 35 tests and a
+real-data CPU forward/backward/reload check pass. See patchstg_implementation.md.
+GPU model fit and training throughput remain unknown. Next propose the separately
+approved host GPU feasibility milestone, then a bounded trainer. BigST variant
+confirmation is still pending. Baseline result tables remain unchanged.

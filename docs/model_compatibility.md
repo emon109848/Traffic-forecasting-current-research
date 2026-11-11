@@ -1,13 +1,14 @@
 # Model compatibility: active BigST/PatchSTG scope
 
-Reviewed: 2026-11-08. Deadline: November 24, 2026.
+Reviewed: 2026-11-11. Deadline: November 24, 2026.
 
 Active models are BigST and PatchSTG. ASTGCN/STAEformer notes below are archived
 context, not implementation priorities. See [roadmap](roadmap.md).
 
- This is a planning review, not completed equation-by-equation
-verification. No author code was copied or executed. References are moving branch
-URLs unless a paper version is specified; freeze source commits before adapting.
+ Architecture review completed; see [PatchSTG guide](papers/patchstg.md),
+[BigST guide](papers/bigst.md) and [implementation plan](model_implementation_plan.md).
+No numerical reproduction is claimed. No author code was copied or executed. References are moving branch
+URLs unless a paper version is specified; partial immutable-source verification is recorded in model_sources.json.
 Licenses for all incorporated code and dataset artifacts must be checked then.
 
 | Model | Core mechanism | Inputs / prerequisites | Implication for SD comparison |
@@ -79,6 +80,6 @@ match eligible origins and revisit baseline reports when necessary. Do not
 commit to separate reproduction tracks or extra datasets before the deadline.
 
 Proposed implementation order: PatchSTG first, then BigST. This replaces the
-STAEformer-first recommendation. The next milestone is a focused architecture
-and feasibility review, with implementation/training separately approved. See
+STAEformer-first recommendation. The architecture review is documented. PatchSTG preprocessing/model components and CPU checks are now implemented;
+GPU feasibility and training remain separately approved. See
 [deadline roadmap](roadmap.md). No large-network scalability claims from SD alone.

@@ -1,6 +1,6 @@
 # Project status
 
-Updated: 2026-11-08
+Updated: 2026-11-11
 
 ## Current deadline scope
 
@@ -98,20 +98,46 @@ Pooled test MAE 28.0045, RMSE 53.3906, MAPE 19.9964%. Four sensors lack nonzero
 training values; global training fallback used. Source files unchanged. No
 packages installed, neural training, graph preprocessing or model implementation.
 
+## BigST/PatchSTG architecture review — complete, scope choice pending
+
+Reviewed both primary papers and author model/config/preprocessing/trainer files.
+Added docs/papers/patchstg.md, docs/papers/bigst.md, docs/model_sources.json and
+docs/model_implementation_plan.md. Immutable references identified; file-level
+pin verification partial and explicitly recorded. PatchSTG MIT license observed;
+BigST root license not found, so no code-reuse permission assumed.
+
+Found PatchSTG reference 288-step similarity segments despite SD's 96 daily
+slots; recommend preserving reference behavior with a discrepancy label first.
+Recommend BigST short-history core without LSFE/spatial regularizer for deadline,
+explicitly labeled as a variant; user confirmation requested and pending.
+No architecture code, index maps, model memory measurements or training performed.
+Review completed Nov 11, later than original Nov 8–10 target. Keep deadline Nov 24.
+
+## PatchSTG spatial/model milestone — complete
+
+User approved moving to PatchSTG implementation. Added training-only spatial
+preparation, integrity/provenance-checked caches, config/model/attention blocks,
+CPU check CLI, tests and MIT attribution notice. Code-aligned adaptation, not an
+official reproduction. Defaults preserve 288-step similarity and full SD widths.
+Stable coordinate/similarity ties are explicit adaptations.
+
+35 tests pass. Real-data full-width batch-one CPU forward/backward and exact
+eval checkpoint reload passed. Model: 2,284,844 trainable parameters, 16 patches
+of 64 positions, output (1,12,716,1). See docs/patchstg_implementation.md and
+reports/patchstg_cpu_check.json. Source arrays unchanged; no packages installed.
+No training, optimizer step, GPU model feasibility or forecast accuracy measured.
+
 ## Proposed next milestone — awaiting approval
 
-Focused BigST/PatchSTG architecture and feasibility review. Trace components,
-input/output shapes, author-code discrepancies and preprocessing requirements;
-resolve BigST long-history variant and matched forecast origins. Propose
-PatchSTG-first implementation and a feasible GPU experiment budget. No neural
-implementation or training is authorized by the documentation-scope update.
-Environment locking, immutable source references and code-license review remain
-prerequisites for research-model experiments. See roadmap.md for tentative dates.
+Host GPU feasibility check: full SD model at batch 1, then 2/4 if memory allows,
+including backward and one optimizer step, allocated/reserved memory and config/
+hardware provenance. Follow with a separately scoped training harness. BigST
+variant still awaits confirmation; no BigST implementation authorized.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. 23 pipeline/baseline/evaluation tests pass. Real-data loading and deterministic baseline
+library. 35 pipeline/baseline/evaluation/model tests pass. Real-data loading and deterministic baseline
 evaluation completed; measured accuracy results are recorded without neural claims.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.
