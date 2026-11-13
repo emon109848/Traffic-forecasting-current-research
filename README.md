@@ -11,10 +11,13 @@ efficiency comparison on SD; it does not establish large-network scalability.
 
 ## Current status
 
-Foundation, compatibility review, environment validation, dataset inspection and
-the reusable data pipeline are complete. Local SD data is excluded from Git.
-Tested persistence and seasonal-average baselines with measured results are available. PatchSTG spatial/model components pass full-width CPU checks; a bounded training harness is CPU-tested. Final neural benchmark results do
-not exist yet; seed-2023 continuation to 50 total epochs is approved.
+The SD pipeline, persistence/seasonal baselines, and PatchSTG implementation,
+training and full test evaluation are complete. Frozen epoch-50 PatchSTG (seed
+2023) achieves test MAE **17.1943**, RMSE **29.1370**, MAPE **11.1706%** across
+6,997 windows. This is a shared-protocol adaptation and one seed, not an official
+paper reproduction. [Results and horizons](reports/patchstg_sd_seed2023_test_v1.md).
+All 58 tests pass. BigST implementation and controlled efficiency benchmarking
+remain pending. Local data, checkpoints and full outputs are excluded from Git.
 
 ## Scope and roadmap
 
@@ -27,8 +30,9 @@ deferred beyond the deadline.
 2. Completed: focused architecture review; BigST variant confirmation is pending.
    PatchSTG preprocessing/model tests and real-data CPU check are complete.
    Host GPU feasibility passed batches 1/2/4. The training harness is implemented; the capped host diagnostic passed; one full-epoch calibration is complete (about 6.10 min train+validation).
-3. Short PatchSTG diagnostic completed; full-epoch calibration completed; 50-total-epoch continuation approved, awaiting host launch;
-   final experiments and BigST implementation remain separately approved.
+3. Completed: PatchSTG 50-total-epoch training and frozen best-checkpoint test
+   evaluation. BigST variant confirmation/implementation is the next proposal,
+   requiring approval before work starts.
 4. Run consistent accuracy and SD efficiency experiments within a measured budget.
 5. Write the comparison, plots, limitations and reproduction instructions.
 
@@ -52,13 +56,15 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -c "import traffic_benchmark"
 Use the existing `pml` Conda environment for current development. No packages
 were changed during validation. A minimal `environment.yml` remains pending
 a complete dependency-locking step; installed NumPy/PyTorch were reused.
-Installation and training instructions will be added when validated. Git is initialized and a GitHub remote is configured. CPU and CUDA smoke checks passed in the user’s `pml` environment on an RTX
-5060 Laptop GPU. This agent session has separate GPU access restrictions.
+Validated training and evaluation commands are linked below. Git is initialized and a GitHub remote is configured. CPU and CUDA smoke checks passed in the user’s `pml` environment on an RTX
+5060 Laptop GPU. Agent CUDA access is now available; the full test pass was run in this session.
 
 ## Project records
 
 Start with [the workflow learning guide](workflow.md) for what was built and why.
 
+- [PatchSTG full test results and horizon comparison](reports/patchstg_sd_seed2023_test_v1.md)
+- [PatchSTG frozen-checkpoint evaluation command](docs/patchstg_evaluation.md)
 - [PatchSTG measured full-epoch calibration](reports/patchstg_calibration_v1.md)
 - [PatchSTG host diagnostic and runtime planning](reports/patchstg_training_smoke_host.md)
 - [PatchSTG training command and checkpoint behavior](docs/patchstg_training.md)
@@ -92,5 +98,5 @@ Start with [the workflow learning guide](workflow.md) for what was built and why
   and [author repository](https://github.com/LMissher/PatchSTG)
 - [LargeST paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/ee57cd73a76bd927ffca3dda1dc3b9d4-Paper-Datasets_and_Benchmarks.pdf)
 
-Reference code has not been copied. Review licenses and record source commits
-before adapting any external code. A project license remains to be chosen.
+PatchSTG adaptation and MIT attribution are documented in THIRD_PARTY_NOTICES.md.
+BigST source review is recorded; do not assume code-reuse permission without a license. A project license remains to be chosen.

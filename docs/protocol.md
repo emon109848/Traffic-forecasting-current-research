@@ -2,7 +2,8 @@
 
 Status: general protocol checklist. Processed-SD assumptions and zero-target
 masking are approved in benchmark_proposal.md; other settings remain proposed.
-Two simple baselines have been evaluated; no research-model experiments exist.
+Two simple baselines and the frozen seed-2023 PatchSTG model have been evaluated.
+See patchstg_evaluation.md for the implemented test protocol; BigST is pending.
 Deadline scope: BigST vs PatchSTG on SD 2019, November 24, 2026. See roadmap.md.
 
 ## Experiment identity

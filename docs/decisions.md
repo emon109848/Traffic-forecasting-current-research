@@ -241,3 +241,21 @@ and all other settings unchanged. Best checkpoint chosen by full validation MAE;
 no test evaluation or additional seed. Estimated remaining train/validation
 time approximately five hours, not guaranteed. No training source changes or
 packages installed. Agent did not launch a GPU job in its restricted session.
+
+## 2026-11-13 — Frozen PatchSTG test evaluation completed
+
+Status: approved implementation, all 58 tests passing, actual full CUDA test pass.
+
+Verified 50-epoch training completion and validation-selected epoch-50 best.pt.
+Preserved the training implementation and artifacts. Test evaluation verifies
+original code/data/scaler/split identity and saved spatial maps before loading
+frozen weights; shared pooled metrics score all windows and the partial batch.
+No optimizer updates or test-based selection/tuning. Dataset/split/per-horizon
+mask counts match both baselines. Reported single-seed SD adaptation accuracy:
+MAE 17.1943, RMSE 29.1370, MAPE 11.1706%. Configuration stays fixed after test
+inspection. No repeated run was used to select a score. A server interruption
+left no saved report; no process remained before evaluation was restarted.
+
+Scoring wall time includes batching, transfers and metrics and is not isolated
+model latency. SD-only results do not demonstrate scalability. BigST variant and
+implementation remain a separate, unapproved next proposal. No packages installed.

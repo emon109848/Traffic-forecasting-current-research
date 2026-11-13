@@ -1,5 +1,13 @@
 # PatchSTG training harness
 
+Current status (November 13): 50-total-epoch seed-2023 training is complete.
+Best epoch 50 has validation MAE 14.9936. Frozen test evaluation is also complete:
+MAE 17.1943, RMSE 29.1370, MAPE 11.1706%. See
+[test results](../reports/patchstg_sd_seed2023_test_v1.md) and
+[evaluation command](patchstg_evaluation.md). Earlier diagnostic/calibration
+sections below are historical; pending-launch statements are superseded.
+
+
 Implemented November 12, 2026. Harness tests and a two-batch real-data CPU
 diagnostic passed. Host GPU capped training diagnostic also passed; see
 [measured diagnostic](../reports/patchstg_training_smoke_host.md). This is not a

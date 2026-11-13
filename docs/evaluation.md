@@ -1,8 +1,8 @@
 # Masked evaluation and persistence
 
 Current deadline scope: BigST vs PatchSTG on SD 2019, November 24, 2026. Both
-simple baselines remain reference results. Model-specific training and controlled
-GPU timing/memory measurements are pending; see [roadmap](roadmap.md).
+simple baselines remain reference results. PatchSTG training/test evaluation is complete. Controlled
+GPU efficiency comparisons remain pending; see [roadmap](roadmap.md).
 
 Independent infrastructure: no author code copied. Metrics accept finite arrays
 of shape (batch,horizon,sensors,channels), cast to float64 and accumulate error
@@ -26,7 +26,7 @@ Persistence takes original-unit history and repeats its last value across all
 leads. It has no learned parameters and preserves zero inputs. The CLI uses
 TrafficWindows target indices and raw last readings to avoid z-score inversion
 noise. It evaluates validation/test without tuning. Seasonal averages are implemented in the subsequent approved baseline milestone;
-no attention model exists yet.
+PatchSTG test evaluation is now implemented; see [frozen-checkpoint evaluation](patchstg_evaluation.md).
 
 See [measured baseline report](../reports/persistence_sd_v1.md) and
 [data pipeline](data_pipeline.md). Tests verify known values, masked zeros,

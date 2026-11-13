@@ -471,3 +471,36 @@ validation-best model. It adds 49 epochs rather than discarding work or restarti
 the short diagnostic. Approximate remaining time is five hours, based on actual
 calibration, not a promised finish time. Host launch is pending; test evaluation
 and additional seeds are not part of this run.
+
+## 24. Evaluate the frozen trained PatchSTG model (November 13)
+
+You completed 50 total training epochs. We verified all epochs, unchanged training
+source hashes, 262,550 updates without skips, and epoch 50 as the validation-best
+checkpoint (MAE 14.9936). Training plus validation took 4.6948 hours across all
+50 epochs, excluding setup and checkpoint writes.
+
+We added a separate test-evaluation command instead of adding test access to the
+trainer. It checks dataset hashes, split boundaries, train-only normalization,
+checkpoint selection and saved spatial-map integrity. It freezes parameters,
+disables dropout and scores all 6,997 test windows using the existing metrics.
+Five new tests cover rejection of incompatible artifacts and unchanged weights
+during complete evaluation. The full suite now has 58 passing tests.
+
+**Why:** validation chooses the model; held-out test data estimates its final
+accuracy. Keeping the trainer separate and checking provenance makes accidental
+retraining, incompatible inputs or test-based selection easier to detect.
+
+Actual test results: MAE 17.1943, RMSE 29.1370, MAPE 11.1706%. All 12 horizons
+are saved. Baseline checksums, splits, origins/window count and horizon mask
+counts match. MAE is 38.60% below seasonal average. This is one seed under the
+shared protocol, not a claim of full paper reproduction or scalability. Test
+results must not guide further PatchSTG tuning. The scoring time includes data
+transfers and metrics; isolated inference benchmarking is still pending.
+
+A sandbox write restriction was resolved before implementation. CUDA became
+available in this session. A server restart interrupted the first evaluation
+launch without a report; we checked no process remained before restarting.
+No training artifacts changed and no new dependencies were installed.
+See [results](reports/patchstg_sd_seed2023_test_v1.md) and
+[evaluation instructions](docs/patchstg_evaluation.md). Next propose BigST variant
+confirmation and implementation; do not start until approved.

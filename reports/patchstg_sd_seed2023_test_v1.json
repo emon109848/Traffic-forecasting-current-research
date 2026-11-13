@@ -1,0 +1,230 @@
+{
+  "status": "completed",
+  "model": "PatchSTG",
+  "implementation": "code-aligned shared-protocol adaptation; not an official reproduction",
+  "created_utc": "2026-11-13T12:14:30.694743+00:00",
+  "checkpoint": {
+    "path": "runs/patchstg_sd_seed2023_50ep/best.pt",
+    "sha256": "fc9f2d10184cd6f82c659e78486793b7f84063e9485eeb9c98c53c8366469154",
+    "epoch": 50,
+    "validation_mae": 14.993616626558444,
+    "selection": "lowest full validation pooled MAE; first epoch wins ties"
+  },
+  "training_report_sha256": "762208ba23f6719ab3852eec6d12c8b83b2f80b15e0256d432197ffac0d90791",
+  "spatial_maps_sha256": "055a1c4df06e0dbe66cd52bf3b3c6a7c5cb87df2cf703d719e16e61cf0688055",
+  "seed": 2023,
+  "scaler": {
+    "mean": 247.19353447084683,
+    "std": 184.27468320611501
+  },
+  "config": {
+    "split": "test",
+    "splits": {
+      "train": [
+        0,
+        21024
+      ],
+      "val": [
+        21024,
+        28032
+      ],
+      "test": [
+        28032,
+        35040
+      ]
+    },
+    "history": 12,
+    "horizon": 12,
+    "stride": 1,
+    "batch_size": 4,
+    "shuffle": false,
+    "num_workers": 0,
+    "device": "cuda:0",
+    "precision": "FP32; deterministic algorithms; no AMP/compile/TF32",
+    "target_mask": "nonzero targets only; no clipping; MAPE percent without epsilon",
+    "prediction_units": "original flow units",
+    "test_used_for_tuning": false
+  },
+  "source_hashes": {
+    "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+    "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+  },
+  "software": {
+    "python": "3.14.8",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.4",
+    "cuda_build": "13.0",
+    "cudnn": 92400
+  },
+  "hardware": {
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "processor": "",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "total_memory_bytes": 8518041600,
+      "compute_capability": [
+        12,
+        0
+      ]
+    }
+  },
+  "git": {
+    "revision": "834ed419cdb6889e924bd4f578a870d294fa6d93",
+    "status": "?? docs/patchstg_evaluation.md\n?? scripts/evaluate_patchstg.py\n?? src/traffic_benchmark/evaluation/checkpoint.py\n?? tests/test_checkpoint_evaluation.py"
+  },
+  "implementation_hashes": {
+    "scripts/evaluate_patchstg.py": "fe7ed11d071dff956f5a70c317d4172ca21f29edc61c28ce1111da2498929984",
+    "src/traffic_benchmark/evaluation/checkpoint.py": "e99170e762f61885edd5e86d2a7694f0d4c3bfb2d565fbac9e8667e415c7a3d2"
+  },
+  "parameters": 2284844,
+  "results": {
+    "test": {
+      "overall_pooled": {
+        "mae": 17.194270237290937,
+        "rmse": 29.1370388301077,
+        "mape_percent": 11.170612948834867,
+        "valid_targets": 58158396,
+        "total_targets": 60118224,
+        "valid_fraction": 0.9674004341844828
+      },
+      "per_horizon": [
+        {
+          "step": 1,
+          "mae": 11.807998825593945,
+          "rmse": 18.956095787584882,
+          "mape_percent": 7.383866585094344,
+          "valid_targets": 4846601,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674140074397407,
+          "minutes": 15
+        },
+        {
+          "step": 2,
+          "mae": 13.486621188161964,
+          "rmse": 22.264034810412454,
+          "mape_percent": 8.300100838081125,
+          "valid_targets": 4846589,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674116121594011,
+          "minutes": 30
+        },
+        {
+          "step": 3,
+          "mae": 14.646503150884001,
+          "rmse": 24.41298153271594,
+          "mape_percent": 9.035329993565435,
+          "valid_targets": 4846576,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674090172723665,
+          "minutes": 45
+        },
+        {
+          "step": 4,
+          "mae": 15.645009322965267,
+          "rmse": 26.15691610291947,
+          "mape_percent": 9.712711570523991,
+          "valid_targets": 4846564,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674066219920269,
+          "minutes": 60
+        },
+        {
+          "step": 5,
+          "mae": 16.56187278028895,
+          "rmse": 27.729180399382305,
+          "mape_percent": 10.356954429010736,
+          "valid_targets": 4846551,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674040271049923,
+          "minutes": 75
+        },
+        {
+          "step": 6,
+          "mae": 17.339887932830337,
+          "rmse": 28.993618929654687,
+          "mape_percent": 10.937080023704253,
+          "valid_targets": 4846538,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9674014322179577,
+          "minutes": 90
+        },
+        {
+          "step": 7,
+          "mae": 18.058410375182717,
+          "rmse": 30.228254934491346,
+          "mape_percent": 11.470573209812487,
+          "valid_targets": 4846526,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673990369376181,
+          "minutes": 105
+        },
+        {
+          "step": 8,
+          "mae": 18.618960578367936,
+          "rmse": 31.216260370321848,
+          "mape_percent": 11.915174796135783,
+          "valid_targets": 4846513,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673964420505835,
+          "minutes": 120
+        },
+        {
+          "step": 9,
+          "mae": 19.206265492849045,
+          "rmse": 32.23554126871369,
+          "mape_percent": 12.587058060114849,
+          "valid_targets": 4846501,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673940467702439,
+          "minutes": 135
+        },
+        {
+          "step": 10,
+          "mae": 19.81159329177754,
+          "rmse": 33.2275691706432,
+          "mape_percent": 13.511006945368138,
+          "valid_targets": 4846490,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673918510965993,
+          "minutes": 150
+        },
+        {
+          "step": 11,
+          "mae": 20.30813484844359,
+          "rmse": 34.17315757947004,
+          "mape_percent": 14.16550349407135,
+          "valid_targets": 4846478,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673894558162597,
+          "minutes": 165
+        },
+        {
+          "step": 12,
+          "mae": 20.840265303508932,
+          "rmse": 35.26595090070823,
+          "mape_percent": 14.672227121510726,
+          "valid_targets": 4846469,
+          "total_targets": 5009852,
+          "valid_fraction": 0.9673876593560049,
+          "minutes": 180
+        }
+      ],
+      "windows": 6997,
+      "wall_seconds": 17.17419954600001
+    }
+  },
+  "timing_scope": "Single full test pass: loading batches, transfers, forward, inverse scaling, metrics; excludes setup; no warmup; not an isolated inference-speed benchmark",
+  "peak_allocated_bytes": 74466816,
+  "peak_reserved_bytes": 96468992,
+  "full_report": {
+    "path": "runs/patchstg_sd_seed2023_test_v1/report.json",
+    "sha256": "9dfc87ac2fb94b6bae0916b022627d6f02bbca535fd603397a990f9add37d631"
+  },
+  "comparison_checks": "Dataset hashes, splits, window count, and all per-horizon target counts match both baseline reports.",
+  "limitations": [
+    "One seed; no uncertainty estimate.",
+    "Adapted implementation, not official reproduction.",
+    "SD efficiency only; no demonstrated scalability.",
+    "Timing includes transfers and metric accumulation; not isolated inference latency."
+  ]
+}

@@ -1,6 +1,6 @@
 # Deadline scope and roadmap
 
-Updated 2026-11-12. Deadline: November 24, 2026. This replaces the initial
+Updated 2026-11-13. Deadline: November 24, 2026. This replaces the initial
 four-model implementation roadmap; the work already completed remains useful.
 
 ## Deliverable
@@ -16,6 +16,16 @@ Scope excludes additional datasets, ASTGCN, STAEformer, newer-model searches,
 large-network scalability claims, extensive tuning, deployment and a web UI.
 Ablations are optional only after core experiments and reporting are complete.
 The existing framework and both baseline results are retained unchanged.
+
+## Current progress — November 13
+
+PatchSTG implementation, full 50-epoch seed-2023 training and frozen-checkpoint
+full test evaluation are complete; all 58 tests pass. Test MAE 17.1943, RMSE
+29.1370, MAPE 11.1706%. See [results](../reports/patchstg_sd_seed2023_test_v1.md).
+Next proposal: confirm BigST variant and implement/test it. Not yet approved.
+Controlled efficiency measurements and final comparison remain open. Historical
+updates below retain the state and approval boundaries at their recorded dates;
+older "pending" statements are superseded by this paragraph.
 
 ## Tentative work budget
 

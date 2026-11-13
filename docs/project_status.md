@@ -1,6 +1,24 @@
 # Project status
 
-Updated: 2026-11-12
+Updated: 2026-11-13
+
+## Current checkpoint
+
+PatchSTG seed-2023 training and frozen-checkpoint test evaluation are complete.
+Epoch 50: validation MAE 14.9936; full test MAE 17.1943, RMSE 29.1370,
+MAPE 11.1706%. See [test report](../reports/patchstg_sd_seed2023_test_v1.md).
+All 58 tests pass. CUDA is now accessible in the agent session; the full test
+pass ran here. Earlier CUDA/write restrictions below are historical.
+
+Next proposed milestone (not approved): resolve BigST variant and implement/test
+it under the same protocol. Short-history/no-LSFE/no-spatial-loss remains a
+proposal requiring explicit confirmation and an accurate variant label. Exact
+environment recreation and controlled efficiency benchmarking remain open.
+Do not tune PatchSTG using its now-observed test results. Do not launch further
+training, additional seeds or BigST work without approval.
+
+Earlier sections below record the progression of completed milestones; their
+"no training" and "pending" statements describe their dates, not current status.
 
 ## Current deadline scope
 
@@ -171,26 +189,33 @@ Peak allocated/reserved 472.60/584 MiB. Code hashes and baseline validation
 valid-target counts checked. Best/last checkpoints saved. See
 reports/patchstg_calibration_v1.json and .md.
 
-## PatchSTG 50-total-epoch continuation — approved, host launch pending
+## PatchSTG 50-total-epoch continuation — complete
 
-User approved 50 total epochs for seed 2023. Created
-configs/patchstg_sd_50epochs.json; only epochs changed from calibration config.
-Verified the local last.pt loads with weights_only=True, epoch=1, and matches
-non-epoch training settings, model dimensions and implementation hashes.
-Continue from calibration last.pt into new runs/patchstg_sd_seed2023_50ep, epochs
-2–50. No restart, smoke resume, extra seed or test evaluation.
+Verified completed report, all epochs 1–50, 262,550 optimizer updates, no skips.
+Best epoch 50, validation MAE 14.9936 / RMSE 25.4044 / MAPE 9.0571%.
+Train plus validation including calibration: 4.6948 hours; setup/checkpoint
+writes excluded. Training sources match original recorded hashes. Curated
+summary: reports/patchstg_sd_seed2023_training.json. Original run unchanged.
 
-Host command is in docs/patchstg_training.md. Expected roughly five more hours
-from measured epoch cost, with actual runtime subject to variation. Agent has
-not launched training; host launch/result confirmation pending. Best checkpoint
-selection remains validation-only. BigST variant and environment recreation
-specification remain open; observed software/package inventory is recorded.
+## PatchSTG frozen-checkpoint test evaluation — complete
+
+User explicitly approved the milestone. Added evaluate_patchstg.py, checkpoint
+integrity helpers, five focused tests and docs/patchstg_evaluation.md. All 58
+tests pass. Evaluated frozen best.pt with saved maps, original train-only
+normalization, no gradients/dropout/updates, batch 4, all 6,997 test windows.
+Test MAE 17.1943, RMSE 29.1370, MAPE 11.1706%; all 12 horizons recorded.
+Dataset hashes, splits and per-horizon target counts match both baselines.
+MAE is 38.60% below seasonal average. Reports: reports/patchstg_sd_seed2023_test_v1.*.
+Full scoring pass 17.174 s includes batching, transfers and metrics; it is not
+isolated inference latency. One seed only; no variability or scalability claim.
+The earlier interrupted launch produced no report; process absence was checked
+before restarting. No training or test-based tuning took place.
 
 ## Validation
 
 Documentation links, metadata and scaffold import checked with the standard
-library. 53 pipeline/baseline/evaluation/model/feasibility/training tests pass. Real-data loading and deterministic baseline
-evaluation completed; measured accuracy results are recorded without neural claims.
+library. 58 pipeline/baseline/evaluation/model/feasibility/training tests pass. Real-data loading and deterministic baseline
+evaluation completed; PatchSTG neural test accuracy is now recorded above.
 No packages, repositories or model weights were downloaded by the agent.
 The traffic dataset was downloaded by the user and inspected locally.
 

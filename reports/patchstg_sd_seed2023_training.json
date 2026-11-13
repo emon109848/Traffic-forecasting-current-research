@@ -1,0 +1,44 @@
+{
+  "status": "completed",
+  "completed_epochs": 50,
+  "best_epoch": 50,
+  "best_validation": {
+    "mae": 14.993616626558444,
+    "rmse": 25.404351243905726,
+    "mape_percent": 9.057098413685473,
+    "valid_targets": 58367674,
+    "total_targets": 60118224,
+    "valid_fraction": 0.9708815416769464
+  },
+  "seed": 2023,
+  "training_config": {
+    "epochs": 50,
+    "batch_size": 4,
+    "seed": 2023,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "grad_clip": 5.0,
+    "milestones": [
+      1,
+      35,
+      40
+    ],
+    "gamma": 0.5,
+    "max_train_batches": null,
+    "max_val_batches": null,
+    "warmup_batches": 5
+  },
+  "total_optimizer_steps": 262550,
+  "total_skipped_empty_batches": 0,
+  "train_plus_validation_wall_seconds": 16901.32786520591,
+  "timing_scope": "All 50 epochs including calibration; excludes setup/checkpoint writes.",
+  "test_evaluated_by_trainer": false,
+  "peak_allocated_bytes": 495558144,
+  "peak_reserved_bytes": 606076928,
+  "full_report": "runs/patchstg_sd_seed2023_50ep/report.json",
+  "full_report_sha256": "762208ba23f6719ab3852eec6d12c8b83b2f80b15e0256d432197ffac0d90791",
+  "source_sha256": {
+    "flowsd.npz": "7aaf031a573bc27451360dee9d74e9359eb8205194077bf922a7a6b4432f771c",
+    "sd_meta.csv": "c72a22095d1353bc38e6cd21daa9c17602023775dada1d84420c1b721e177e4a"
+  }
+}
